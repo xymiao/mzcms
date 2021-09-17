@@ -1,22 +1,45 @@
 <template>
-
-  <HelloWorld msg="MzCMS" />
+<el-container>
+    <el-aside class="cms-aside">
+      <left-navbar></left-navbar>
+    </el-aside>
+    <el-container class="cms-main">
+      <el-header>
+        <cms-header></cms-header>
+      </el-header>
+      <el-main class="cms-content">
+      <div  style="text-align: center; padding-top: 100px; font-size: 30px;">静态模版搭建初始化</div>
+      </el-main>
+      <el-footer style="text-align: center;font-size: 14px; ">Copyright © 2021  MzCMS </el-footer>
+    </el-container>
+  </el-container>
 </template>
 
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import CmsHeader from './components/CmsHeader.vue'
+import LeftNavbar from "./components/LeftNavbar.vue";
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*{
+  padding: 0;
+  margin: 0;
 }
-.element-plus-logo {
-  width: 50%;
+html, body, #app{
+  height: 100%;
+}
+.el-header{
+  --el-header-padding: 0;
+}
+.cms-content{
+  min-height: 500px;
+}
+.cms-aside{
+  width:240px;
+  position: fixed;
+  height: 100%;
+}
+.cms-main{
+  margin-left: 240px;
 }
 </style>
