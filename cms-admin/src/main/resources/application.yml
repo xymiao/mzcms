@@ -1,0 +1,14 @@
+server:
+  port: 8003
+
+logging:
+  level:
+    web: debug
+    com.xymiao.cms: debug
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url:  jdbc:mysql://127.0.0.1:3306/mzcms?useUnicode=true&useSSL=true
+    username: root
+    password: xymiao
+    driver-class-name: com.mysql.jdbc.Driver
