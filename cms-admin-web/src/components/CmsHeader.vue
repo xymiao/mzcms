@@ -1,5 +1,12 @@
-<script setup lang="ts">
-
+<script  >
+export default {
+  methods:{
+    exitSystem(){
+      this.$store.commit("userExit");
+      this.$router.push("/login");
+    }
+  }
+}
 </script>
 
 <template>
@@ -26,7 +33,7 @@
       </el-sub-menu>
     </el-sub-menu>
     <el-menu-item index="3" >系统管理</el-menu-item>
-    <el-menu-item index="4" class="menu-right">消息中心</el-menu-item>
+    <el-menu-item index="4" class="menu-right" @click="exitSystem">退出</el-menu-item>
   </el-menu>
 
 </template>

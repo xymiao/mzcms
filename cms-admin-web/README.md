@@ -1,22 +1,22 @@
-# element-plus-vite-starter
+# MzCMS后台管理前端
 
-> A starter kit for Element Plus with Vite
+> 使用Vite构建的 Element Plus 前端应用
 
 <img width="800" alt="Element Plus" src="https://user-images.githubusercontent.com/10731096/97282764-0726eb80-187a-11eb-9658-6dc98ccb8f8d.png">
 
-## Project setup
+## 首先操作
 
 ```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
+###  开发调试
 
 ```bash
 npm run dev
 ```
 
-### Compiles and minifies for production
+### 编译部署
 
 ```bash
 npm run build
