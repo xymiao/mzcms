@@ -1,21 +1,24 @@
 import { createStore } from 'vuex'
 
 // 创建一个新的 store 实例
-export const store = createStore({
+export  const store = createStore({
     state () {
         return {
             userSession: '1',
-            count: 0
+            isCollapse: false,
         }
     },
     getters: {
         isLogin: (state) => {
             return state.userSession;
         },
+        isCollapse: (state) =>{
+            return state.isCollapse;
+        },
     },
     mutations: {
-        increment (state) {
-            state.count++
+        useMenuCollapse(state, value){
+            state.isCollapse = value;
         },
         userLogin(state){
             state.userSession = '2';
@@ -25,5 +28,5 @@ export const store = createStore({
         }
     }
 })
-
 export  default { store }
+

@@ -5,6 +5,8 @@ const Home = () => import('../pages/Home.vue')
 const About = () => import('../pages/About.vue')
 const NotFound = () => import( '../pages/NotFound.vue')
 const Login = () => import('../pages/Login.vue')
+const Content = () => import('../pages/Content.vue')
+const ContentCategory = () => import('../pages/ContentCategory.vue')
 
 const Layout = () => import('../pages/Layout.vue')
 const routes = [
@@ -17,9 +19,13 @@ const routes = [
                 component: Home
             },
             {
-                path: 'about1',
-                component: About
-            }
+                path: 'content',
+                component: Content
+            },
+            {
+                path: 'content_category',
+                component: ContentCategory
+            },
         ]
     },
     {path: '/about', component: About},
