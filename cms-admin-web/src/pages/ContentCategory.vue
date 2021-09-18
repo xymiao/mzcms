@@ -1,8 +1,8 @@
 <template>
-   <el-breadcrumb separator="/">
-   <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-   <el-breadcrumb-item><a href="/">内容分类管理</a></el-breadcrumb-item>
- </el-breadcrumb>
+  <el-breadcrumb separator="/">
+    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item><a href="/">内容分类管理</a></el-breadcrumb-item>
+  </el-breadcrumb>
   <el-card class="box-card">
     <el-row>
       <el-col :span="4">
@@ -30,19 +30,21 @@
           <el-table-column prop="date" label="每页内容数"></el-table-column>
           <el-table-column prop="address" label="前台显示"></el-table-column>
           <el-table-column prop="address" label="排序"></el-table-column>
-           <el-table-column fixed="right" label="操作" width="160">
-                <template #default="scope">
-                  <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-                    >编辑</el-button
-                  >
-                  <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDelete(scope.$index, scope.row)"
-                    >删除</el-button
-                  >
-                </template>
-              </el-table-column>
+          <el-table-column fixed="right" label="操作" width="160">
+            <template #default="scope">
+              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+              >编辑
+              </el-button
+              >
+              <el-button
+                  size="mini"
+                  type="danger"
+                  @click="handleDelete(scope.$index, scope.row)"
+              >删除
+              </el-button
+              >
+            </template>
+          </el-table-column>
         </el-table>
         <div class="block">
           <el-pagination
@@ -61,10 +63,10 @@
 </template>
 
 <script>
+import axios from "../http/request";
 export default {
   data() {
     return {
-
       data: [
         {
           label: '一级 1',
@@ -155,6 +157,13 @@ export default {
         },
       ],
     }
+  },
+  created() {
+    console.log("load data");
+    let data  = {id:1};
+    axios({url: '/api/v1/menu/t', method: 'get', data}).then(res=>{
+      console.log(res);
+    });
   },
   methods: {
     goBack() {

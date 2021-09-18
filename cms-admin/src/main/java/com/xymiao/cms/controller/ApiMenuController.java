@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController()
 public class ApiMenuController {
     private final CmsMenuService cmsMenuService;
     @Autowired
@@ -14,7 +14,7 @@ public class ApiMenuController {
         this.cmsMenuService = cmsMenuService;
     }
 
-    @GetMapping("menutest")
+    @GetMapping("api/v1/menu/t")
     public String menutest(String id){
         CmsMenu cmsMenu = cmsMenuService.getMenu(id);
         return cmsMenu != null ? cmsMenu.toString() : "无数据";
