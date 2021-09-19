@@ -12,3 +12,6 @@ spring:
     username: mzcms
     password: mzcms
     driver-class-name: com.mysql.jdbc.Driver
+jwt:
+  private.key: classpath:app.key
+  public.key: classpath:app.pub
