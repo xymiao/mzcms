@@ -18,3 +18,50 @@ PRIMARY KEY (`menu_id`))
 COMMENT = '菜单表';
 
 ```
+
+
+### 用户相关的表
+```mysql
+CREATE TABLE `mzcms`.`sys_user` (
+  `user_id` VARCHAR(32) NOT NULL COMMENT '用户主键',
+  `nick_name` VARCHAR(64) NULL COMMENT '昵称',
+  `login_id` VARCHAR(32) NULL COMMENT '登录用户名',
+  `last_time` VARCHAR(45) NULL COMMENT '最后登录时间',
+  `created` DATETIME NULL COMMENT '创建时间',
+  `user_pwd` VARCHAR(128) NULL COMMENT '用户密码',
+  PRIMARY KEY (`user_id`));
+
+```
+
+```mysql
+
+CREATE TABLE `mzcms`.`sys_role` (
+  `role_id` VARCHAR(32) NOT NULL COMMENT '角色主键',
+  `role_name` VARCHAR(64) NULL COMMENT '角色名称',
+  `role_desc` VARCHAR(64) NULL COMMENT '角色说明',
+  PRIMARY KEY (`role_id`))
+COMMENT = '角色表';
+
+```
+
+```mysql
+
+CREATE TABLE `mzcms`.`sys_permission` (
+  `permission_id` VARCHAR(32) NOT NULL COMMENT '主键',
+  `permission_code` VARCHAR(32) NULL COMMENT '权限代码',
+  `permission_name` VARCHAR(64) NULL COMMENT '权限名称',
+  PRIMARY KEY (`permission_id`))
+COMMENT = '权限表';
+
+```
+
+```mysql
+
+CREATE TABLE `mzcms`.`sys_role_permission` (
+  `role_permission_id` VARCHAR(32) NOT NULL COMMENT '主键',
+  `role_id` VARCHAR(32) NULL COMMENT '角色id',
+  `permission_id` VARCHAR(32) NULL COMMENT '权限id',
+  PRIMARY KEY (`role_permission_id`))
+COMMENT = '角色权限关联';
+
+```
