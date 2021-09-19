@@ -9,9 +9,14 @@ import lombok.ToString;
 @ToString
 @TableName("CMS_MENU")
 public class CmsMenu {
+
     @TableId
     private String menuId;
     private String menuName;
     private int sort;
     private String menuInfo;
+    private String parentId;
+    private String menuType;
+    private String menuModule;
+
 }

@@ -9,6 +9,6 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url:  jdbc:mysql://127.0.0.1:3306/mzcms?useUnicode=true&useSSL=true
-    username: root
-    password: xymiao
+    username: mzcms
+    password: mzcms
     driver-class-name: com.mysql.jdbc.Driver
