@@ -3,11 +3,12 @@ package com.xymiao.pojo.auth;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @TableName("SYS_USER")
-public class SysUser {
+public class SysUser implements Serializable {
     @TableId
     private String userId;
     private String nickName;
