@@ -21,15 +21,15 @@
             <el-button class="button" type="text">操作按钮</el-button>
           </div>
         </template>
-        <el-table :data="tableData" border style="width: 100%">
-          <el-table-column prop="id" label="ID" width="80"></el-table-column>
-          <el-table-column prop="name" label="名称" width="180"></el-table-column>
-          <el-table-column prop="address" label="编码"></el-table-column>
-          <el-table-column prop="address" label="父类类型"></el-table-column>
-          <el-table-column prop="address" label="父分类"></el-table-column>
-          <el-table-column prop="date" label="每页内容数"></el-table-column>
-          <el-table-column prop="address" label="前台显示"></el-table-column>
-          <el-table-column prop="address" label="排序"></el-table-column>
+        <el-table :data="menuCategory" border style="width: 100%">
+          <el-table-column prop="menuId" label="ID" width="80"></el-table-column>
+          <el-table-column prop="menuName" label="名称" width="180"></el-table-column>
+          <el-table-column prop="menuModule" label="编码"></el-table-column>
+          <el-table-column prop="menuName" label="父类类型"></el-table-column>
+          <el-table-column prop="menuType" label="父分类"></el-table-column>
+          <el-table-column prop="parentId" label="每页内容数"></el-table-column>
+          <el-table-column prop="sort" label="前台显示"></el-table-column>
+          <el-table-column prop="sort" label="排序"></el-table-column>
           <el-table-column fixed="right" label="操作" width="160">
             <template #default="scope">
               <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
@@ -129,7 +129,7 @@ export default {
         children: 'children',
         label: 'label',
       },
-
+      menuCategory:[],
       tableData: [
         {
           id: '1',
@@ -162,7 +162,10 @@ export default {
     console.log("load data");
     let data  = {id:1};
     axios({url: '/api/v1/menu/t', method: 'get', data}).then(res=>{
-      console.log(res);
+      console.log(res.data);
+      this.menuCategory.push(res.data);
+      console.log("menu", this.menuCategory)
+
     });
   },
   methods: {

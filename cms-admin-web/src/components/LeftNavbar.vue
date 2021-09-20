@@ -70,11 +70,7 @@ export default {
       <el-menu-item index="1-1">权限管理</el-menu-item>
       <el-menu-item index="1-1">角色管理</el-menu-item>
       <el-menu-item index="1-1">日志管理</el-menu-item>
-      <el-menu-item index="1-1">站点配置</el-menu-item>
-      <el-menu-item index="1-1">数据字典</el-menu-item>
-      <el-menu-item index="1-1">权限管理</el-menu-item>
-      <el-menu-item index="1-1">角色管理</el-menu-item>
-      <el-menu-item index="1-1">日志管理</el-menu-item>
+      <el-menu-item index="1-1">菜单管理</el-menu-item>
     </el-sub-menu>
   </el-menu>
   <div style="position: fixed; bottom: 10px; left: 20px;">
