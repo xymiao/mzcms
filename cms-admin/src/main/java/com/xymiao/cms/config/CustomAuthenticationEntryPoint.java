@@ -1,5 +1,7 @@
 package com.xymiao.cms.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xymiao.cms.util.ResponseBodyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
@@ -21,6 +23,8 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         logger.info("没有登录， 请登录");
         response.setStatus(200);
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().append("请登录");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writeValue(response.getWriter(), ResponseBodyUtils.createByErrorCodeMessage(401,"没有登录， 请登录！"));
+
     }
 }
