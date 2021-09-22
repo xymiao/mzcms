@@ -41,14 +41,13 @@ instance.interceptors.response.use(res => {
             // 对得到的状态码的处理，具体的设置视自己的情况而定
             case 401:
                 console.log('未登录401')
-
                 break
             case 403:
                 console.log('未登录403')
                 store.commit("userClean");
                 break
             case 404:
-                window.location.href='/'
+                console.log('未登录404')
                 break
             case 405:
                 console.log('不支持的方法')

@@ -7,25 +7,31 @@ const NotFound = () => import( '../pages/NotFound.vue')
 const Login = () => import('../pages/Login.vue')
 const Content = () => import('../pages/Content.vue')
 const ContentCategory = () => import('../pages/ContentCategory.vue')
+const MenuMange = () => import('../pages/MenuMange.vue')
+
 
 const Layout = () => import('../pages/Layout.vue')
 const routes = [
     {path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound},
     {
-        path: '/', component: Layout,
+        path: '/', component: Layout, name: 'home',
         children: [
             {
                 path: '',
-                component: Home
+                component: Home, name: 'home',
             },
             {
                 path: 'content',
-                component: Content
+                component: Content, name: 'content',
             },
             {
                 path: 'content_category',
-                component: ContentCategory
+                component: ContentCategory, name: 'content_category',
             },
+            {
+                path: 'sys_menu',
+                component: MenuMange, name: 'sys_menu',
+            }
         ]
     },
     {path: '/about', component: About},
