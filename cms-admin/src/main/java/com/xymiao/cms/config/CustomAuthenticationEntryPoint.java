@@ -25,6 +25,5 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setContentType("application/json;charset=UTF-8");
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(response.getWriter(), ResponseBodyUtils.createByErrorCodeMessage(401,"没有登录， 请登录！"));
-
     }
 }

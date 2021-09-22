@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Data
 @ToString
 @TableName("CMS_MENU")
@@ -18,5 +20,7 @@ public class CmsMenu {
     private String parentId;
     private String menuType;
     private String menuModule;
-
+    private String delFlag;
+    private LocalDateTime created;
+    private LocalDateTime lastDate;
 }

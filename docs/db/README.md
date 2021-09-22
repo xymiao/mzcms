@@ -14,6 +14,9 @@ CREATE TABLE `mzcms`.`cms_menu` (
 `parent_id` VARCHAR(32) NULL COMMENT '父类id, 默认为 parent 定义为父类' ,
 `menu_type` VARCHAR(32) NULL ,
 `menu_module` VARCHAR(45) NULL COMMENT '模块名称',
+`del_flag` VARCHAR(2) NULL COMMENT '删除标志 1 删除  0 正常' ,
+`created` DATETIME NULL COMMENT '创建时间' ,
+`last_date` DATETIME NULL COMMENT '最后更新时间',
 PRIMARY KEY (`menu_id`))
 COMMENT = '菜单表';
 
