@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xymiao.cms.mapper.CmsMenuMapper">
+    <resultMap id="cmsMenuResultMap" type="com.xymiao.cms.pojo.CmsMenu">
+        <id property="menuId" column="menu_id" />
+        <result property="menuName" column="menu_name"/>
+        <result property="menuInfo" column="menu_info"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="menuModule" column="menu_module"/>
+        <result property="menuType" column="menu_type"/>
+        <result property="url" column="url"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+    <resultMap id="cmsMenuRelationResultMap" extends="cmsMenuResultMap" type="com.xymiao.cms.pojo.CmsMenu">
+        <collection property="cmsMenus" select="selectMenuByParentId"  column="menu_id" foreignColumn="parent_id"
+                    ofType="com.xymiao.cms.pojo.CmsMenu" >
+        </collection>
+    </resultMap>
+
+    <select id="queryMenuList" resultMap="cmsMenuRelationResultMap">
+        select  * from cms_menu where del_flag = '0' and parent_id = 'parent' and menu_module = #{menuModule, jdbcType=VARCHAR} order by sort
+    </select>
+
+    <select id="selectMenuByParentId" resultType="com.xymiao.cms.pojo.CmsMenu">
+        select  * from cms_menu where del_flag = '0'  and  parent_id = #{menu_id, jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-package com.xymiao.pojo;
+package com.xymiao.cms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

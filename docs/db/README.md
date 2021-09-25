@@ -17,6 +17,7 @@ CREATE TABLE `mzcms`.`cms_menu` (
 `del_flag` VARCHAR(2) NULL COMMENT '删除标志 1 删除  0 正常' ,
 `created` DATETIME NULL COMMENT '创建时间' ,
 `last_date` DATETIME NULL COMMENT '最后更新时间',
+`url` VARCHAR(200) NULL COMMENT  '请求地址',
 PRIMARY KEY (`menu_id`))
 COMMENT = '菜单表';
 

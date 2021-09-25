@@ -4,18 +4,20 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xymiao.cms.mapper.CmsMenuMapper;
-import com.xymiao.pojo.cms.CmsMenu;
+import com.xymiao.cms.pojo.CmsMenu;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 @Service("CmsMenuServiceImpl")
 public class CmsMenuServiceImpl  implements  CmsMenuService{
+    private final static Logger logger = LoggerFactory.getLogger(CmsMenuServiceImpl.class);
     private  CmsMenuMapper cmsMenuMapper;
     @Autowired
     public CmsMenuServiceImpl(CmsMenuMapper cmsMenuMapper) {
@@ -46,8 +48,10 @@ public class CmsMenuServiceImpl  implements  CmsMenuService{
     @Override
     public  Page<CmsMenu> listMenu(String module, String type, Integer current, Integer size) {
         Page<CmsMenu> cmsMenuPage = cmsMenuMapper.selectPage(new Page<>(current, size),
-                Wrappers.<CmsMenu>lambdaQuery().eq(CmsMenu::getMenuModule, module).eq(CmsMenu::getMenuType, type) );
-
+                Wrappers.<CmsMenu>lambdaQuery().eq(CmsMenu::getParentId, "parent").eq(CmsMenu::getMenuModule, module).eq(CmsMenu::getMenuType, type) );
+        List<CmsMenu> cmsMenus = cmsMenuMapper.queryMenuList("backend");
+        cmsMenuPage.setRecords(cmsMenus);
+        logger.info("数据信息： {}", cmsMenus);
         return cmsMenuPage;
     }
 

@@ -1,4 +1,4 @@
-package com.xymiao.pojo;
+package com.xymiao.cms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,6 +1,6 @@
 package com.xymiao.cms.service.user;
 
-import com.xymiao.pojo.auth.SysUser;
+import com.xymiao.cms.pojo.auth.SysUser;
 
 public interface SysUserService {
     /**
