@@ -3,6 +3,8 @@ package com.xymiao.cms.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xymiao.cms.pojo.CmsMenu;
 
+import java.util.List;
+
 /**
  * 菜单相关的业务处理
  */
@@ -41,4 +43,12 @@ public interface CmsMenuService {
      * @return 受影响的行数
      */
     int delMenu(String menuId);
+
+    /**
+     * 根据用户信息加载对应的菜单信息
+     * @param module
+     * @param left_nav
+     * @return
+     */
+    List<CmsMenu> listMenuByUser(String userId, String module, String left_nav);
 }

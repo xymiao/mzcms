@@ -8,3 +8,15 @@ export  const listMenu = (data) => {
 export  const putMenu = (data) => {
     return axios({url: '/api/v1/menu/put' , method: 'post', data});
 }
+
+export  const editMenu = (data) => {
+    return axios({url: '/api/v1/menu/edit' , method: 'post', data});
+}
+
+export  const delMenu = (data) => {
+    return axios({url: '/api/v1/menu/del' , method: 'post', data});
+}
+
+export  const showMenu = (data) => {
+    return axios({url: '/api/v1/menu/show/' + data.module, method: 'post', data});
+}

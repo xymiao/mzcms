@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-@Service("CmsMenuServiceImpl")
+@Service("cmsMenuServiceImpl")
 public class CmsMenuServiceImpl  implements  CmsMenuService{
     private final static Logger logger = LoggerFactory.getLogger(CmsMenuServiceImpl.class);
     private  CmsMenuMapper cmsMenuMapper;
@@ -73,5 +73,11 @@ public class CmsMenuServiceImpl  implements  CmsMenuService{
         cmsMenu.setLastDate(LocalDateTime.now());
         int rows = cmsMenuMapper.update(cmsMenu, Wrappers.<CmsMenu>lambdaQuery().eq(CmsMenu::getMenuId, menuId));
         return rows;
+    }
+
+    @Override
+    public List<CmsMenu> listMenuByUser(String userId, String module, String left_nav) {
+        List<CmsMenu> cmsMenus = cmsMenuMapper.queryMenuList("backend");
+        return cmsMenus;
     }
 }

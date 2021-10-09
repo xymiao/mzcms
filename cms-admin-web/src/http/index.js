@@ -40,7 +40,8 @@ instance.interceptors.response.use(res => {
         switch(err.response.status){
             // 对得到的状态码的处理，具体的设置视自己的情况而定
             case 401:
-                console.log('未登录401')
+                console.log('未登录401');
+                ElMessage.error('登录失败, ' +  err.response.data.message)
                 break
             case 403:
                 console.log('未登录403')
@@ -57,6 +58,8 @@ instance.interceptors.response.use(res => {
                 console.log('其他错误')
                 break
         }
+    }else{
+        ElMessage.error("请求数据错误！")
     }
     // 注意这里应该return promise.reject(),
     // 因为如果直接return err则在调用此实例时，响应失败了也会进入then(res=>{})而不是reject或catch方法

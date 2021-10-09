@@ -1,4 +1,4 @@
-package com.xymiao.cms.controller;
+package com.xymiao.cms.controller.api;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xymiao.cms.service.CmsMenuService;
@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 菜单相关的业务功能接口
@@ -76,6 +78,18 @@ public class ApiMenuController {
     public ResponseBodyUtils<Page<CmsMenu>> listMenu(@PathVariable  String module, @RequestParam(defaultValue = "1") Integer currPage){
         logger.info("获取菜单列表功能， 根据模块： {}", module);
         Page<CmsMenu> cmsMenus = cmsMenuService.listMenu(module, "left_nav", currPage, 10);
+        return ResponseBodyUtils.createBySuccess(cmsMenus);
+    }
+
+    /**
+     * 加载菜单权限
+     * @param module
+     * @return
+     */
+    @PostMapping("show/{module}")
+    public ResponseBodyUtils<List<CmsMenu>> showMenu(@PathVariable  String module){
+        logger.info("获取菜单列表功能， 根据模块： {}", module);
+        List<CmsMenu> cmsMenus = cmsMenuService.listMenuByUser("", module, "left_nav");
         return ResponseBodyUtils.createBySuccess(cmsMenus);
     }
 }

@@ -11,6 +11,7 @@
         </el-form-item>
         <el-button type="primary" @click="login" style="width: 100%;">登录</el-button>
       </el-card>
+      {{c}}
     </el-col>
   </el-row>
 </template>
@@ -42,7 +43,8 @@ export default {
             message: '登录成功！',
             type: 'success',
           });
-          this.$router.push('/');
+          window.location.href="/";
+          //this.$router.push('/');
         }else{
           ElMessage.error('登录失败， 帐号和密码不正确')
         }

@@ -69,3 +69,20 @@ CREATE TABLE `mzcms`.`sys_role_permission` (
 COMMENT = '角色权限关联';
 
 ```
+
+## 站点配置表
+```mysql
+CREATE TABLE `sys_site_setting` (
+  `site_id` VARCHAR(32) NOT NULL COMMENT '主键',
+  `title` VARCHAR(100) NULL COMMENT '配置名称',
+  `site_key` VARCHAR(32) NULL COMMENT '配置主键',
+  `site_value` VARCHAR(100) NULL COMMENT '配置值',
+  `value_type` VARCHAR(32) NULL COMMENT 'value 类型  text, json ',
+  `site_state` VARCHAR(1) NULL COMMENT '状态 1 有效  2 无效',
+  `created` DATETIME NULL COMMENT '创建时间',
+  `updated` DATETIME NULL COMMENT '修改时间',
+  `user_id` VARCHAR(32) NULL COMMENT '创建人',
+  `module_type` VARCHAR(32) NULL COMMENT '模块类型',
+  PRIMARY KEY (`site_id`))
+COMMENT = '系统站点设置表';
+```

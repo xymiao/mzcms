@@ -8,6 +8,7 @@ const Login = () => import('../pages/Login.vue')
 const Content = () => import('../pages/Content.vue')
 const ContentCategory = () => import('../pages/ContentCategory.vue')
 const MenuMange = () => import('../pages/MenuMange.vue')
+const SiteSetting = () => import('../pages/SiteSetting.vue')
 
 
 const Layout = () => import('../pages/Layout.vue')
@@ -31,7 +32,12 @@ const routes = [
             {
                 path: 'sys_menu',
                 component: MenuMange, name: 'sys_menu',
-            }
+            },
+            {
+                path: 'site_setting',
+                component: SiteSetting, name: 'site_setting',
+            },
+            
         ]
     },
     {path: '/about', component: About},
