@@ -3,7 +3,6 @@ package com.xymiao.cms.util;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.xymiao.cms.enums.ResponseCode;
 
-
 /**
  * 返回数据工具
  *
@@ -11,7 +10,7 @@ import com.xymiao.cms.enums.ResponseCode;
  */
 public class ResponseBodyUtils<T> {
 
-	private int rcode = 200;
+	private int rcode = ResponseCode.SUCCESS.getCode();
 	private String message;
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Integer errcode;
@@ -49,7 +48,6 @@ public class ResponseBodyUtils<T> {
 		return new ResponseBodyUtils<T>(ResponseCode.SUCCESS.getCode(), msg, data);
 	}
 
-
 	public static <T> ResponseBodyUtils<T> createByErrorMessage(String errorMessage) {
 		return new ResponseBodyUtils<T>(ResponseCode.ERROR.getCode(), errorMessage);
 	}
@@ -78,7 +76,7 @@ public class ResponseBodyUtils<T> {
 	public ResponseBodyUtils<T> error(T data, String message) {
 		this.data = data;
 		this.message = message;
-		rcode = 400;
+		rcode = ResponseCode.ERROR.getCode();
 		return this;
 	}
 
@@ -89,7 +87,7 @@ public class ResponseBodyUtils<T> {
 	public ResponseBodyUtils<T> success(T data, String message) {
 		this.data = data;
 		this.message = message;
-		rcode = 200;
+		rcode = ResponseCode.SUCCESS.getCode();
 		return this;
 	}
 
@@ -158,11 +156,11 @@ public class ResponseBodyUtils<T> {
 	public ResponseBodyUtils(T data, String message) {
 		this.data = data;
 		this.message = message;
-		this.rcode = 200;
+		this.rcode = ResponseCode.SUCCESS.getCode();
 	}
 
 	public ResponseBodyUtils(T data) {
 		this.data = data;
-		this.rcode = 200;
+		this.rcode = ResponseCode.SUCCESS.getCode();
 	}
 }

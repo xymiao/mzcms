@@ -23,6 +23,46 @@ COMMENT = '菜单表';
 
 ```
 
+```mysql
+CREATE TABLE `cms_category` (
+  `category_id` VARCHAR(32) NOT NULL COMMENT '类别主键',
+  `name` VARCHAR(60) NULL COMMENT '类别名称',
+  `icon_url` VARCHAR(200) NULL COMMENT '图标',
+  `module_id` VARCHAR(32) NULL COMMENT '模块主键',
+  `parent_id` VARCHAR(45) NULL COMMENT '父类id  默认 parent',
+  `created` DATETIME NULL COMMENT '创建时间',
+  `last_date` DATETIME NULL COMMENT '最后修改时间',
+  `user_id` VARCHAR(32) NULL COMMENT '创建人',
+  `sort` int(10) NULL COMMENT '排序,
+  `url` VARCHAR(100) NULL COMMENT 'url地址',
+  PRIMARY KEY (`category_id`))
+COMMENT = '内容类别';
+```
+
+```mysql
+CREATE TABLE `mzcms`.`cms_content` (
+  `content_id` VARCHAR(32) NOT NULL COMMENT '主键',
+  `title` VARCHAR(200) NULL COMMENT '内容标题',
+  `content` LONGTEXT NULL COMMENT '内容',
+  `view_num` INT(11) NULL COMMENT '阅读数 后期单独开表',
+  `comment_num` INT(11) NULL COMMENT '评论说 后期单独开表',
+  `content_state` VARCHAR(2) NULL COMMENT '状态 0 新建状态 2 发布状态',
+  `comment_flag` VARCHAR(2) NULL COMMENT '是否开启评论 0 不开启 1 开启 2 登录开启',
+  `created` DATETIME NULL COMMENT '创建时间',
+  `publish_date` DATETIME NULL COMMENT '发布时间',
+  `publish_user` VARCHAR(32) NULL COMMENT '发布人',
+  `updated` DATETIME NULL COMMENT '最后更新时间',
+  `user_id` VARCHAR(32) NULL COMMENT '创建人',
+  `del_flag` VARCHAR(2) NULL COMMENT '删除状态标志 0 正常 1 已删除',
+  `content_desc` VARCHAR(500) NULL COMMENT '内容摘要',
+  `title_mini` VARCHAR(100) NULL COMMENT '小标题',
+  `content_type` VARCHAR(32) NULL COMMENT '内容类型 post 文章  page 页面',
+  `content_pwd` VARCHAR(32) NULL COMMENT '内容密码',
+  PRIMARY KEY (`content_id`))
+COMMENT = '内容表';
+
+```
+
 
 ### 用户相关的表
 ```mysql

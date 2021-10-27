@@ -1,7 +1,6 @@
 package com.xymiao.cms.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xymiao.cms.service.auth.JWTUtil;
 import com.xymiao.cms.util.ResponseBodyUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
