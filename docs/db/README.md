@@ -33,7 +33,9 @@ CREATE TABLE `cms_category` (
   `created` DATETIME NULL COMMENT '创建时间',
   `last_date` DATETIME NULL COMMENT '最后修改时间',
   `user_id` VARCHAR(32) NULL COMMENT '创建人',
-  `sort` int(10) NULL COMMENT '排序,
+  `sort` int(10) NULL COMMENT '排序',
+  `del_flag` VARCHAR(2) NULL COMMENT '删除标志 1 删除 0 不删除' ,
+  `status` VARCHAR(2) NULL COMMENT '状态 1 有效 0 无效',
   `url` VARCHAR(100) NULL COMMENT 'url地址',
   PRIMARY KEY (`category_id`))
 COMMENT = '内容类别';

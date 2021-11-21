@@ -22,7 +22,7 @@ const routes = [
                 component: Home, name: 'home',
             },
             {
-                path: 'content',
+                path: 'content_manage',
                 component: Content, name: 'content',
             },
             {

@@ -11,12 +11,11 @@
         </el-form-item>
         <el-button type="primary" @click="login" style="width: 100%;">登录</el-button>
       </el-card>
-      {{c}}
     </el-col>
   </el-row>
 </template>
 
-<script>
+<script lang="ts">
 import {ElMessage} from 'element-plus'
 import {userLogin} from '../api/api_user'
 

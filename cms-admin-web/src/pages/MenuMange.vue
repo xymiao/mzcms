@@ -23,7 +23,7 @@
       <el-table-column prop="menuInfo" label="菜单描述"></el-table-column>
       <el-table-column fixed="right" label="操作" width="220">
         <template #default="scope">
-          <el-button size="mini" @click="handleAddSubMenu(scope.$index, scope.row)"
+          <el-button size="mini" @click="handleAddSubMenu(scope)"
           >新增
           </el-button
           >
@@ -106,7 +106,7 @@
         <el-input type="textarea" v-model="form.menuInfo"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="addMenu(scope.$index)">立即创建</el-button>
+        <el-button type="primary" @click="addMenu">立即创建</el-button>
       </el-form-item>
     </el-form>
 
@@ -114,7 +114,7 @@
 
 </template>
 
-<script>
+<script lang="ts">
 
 import {listMenu, putMenu, editMenu, delMenu} from '../api/api_menu'
 import {ElMessage} from "element-plus";
@@ -165,14 +165,13 @@ export default {
       this.editMenu = value;
       this.editMenuVisible = true;
     },
-    handleAddSubMenu(index, value) {
-      console.log(index, value);
-      this.form.parentId = value.menuId;
-      this.parentName = value.menuName;
+    handleAddSubMenu(scope) {
+      console.log(scope);
+      this.form.parentId = scope.row.menuId;
+      this.parentName = scope.row.menuName;
       this.addMenuVisible = true;
     },
-    addMenu(index) {
-      console.log(index);
+    addMenu() {
       putMenu(this.form).then(res => {
         console.log(res);
         this.menuList.records.unshift(res.data);
@@ -216,11 +215,7 @@ export default {
         console.log(res)
         if (res.rcode == 0) {
           ElMessage.success("删除成功！");
-
-          this.menuList.records.filter(function (item, index, array) {
-            console.log(item.menuId)
-            return item.item != value.menuId;
-          });
+          this.loadMenuList();
         } else {
           ElMessage.error("删除失败！");
         }

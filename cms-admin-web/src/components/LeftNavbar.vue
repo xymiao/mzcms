@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import {showMenu} from "../api/api_menu";
 
 export default {
@@ -36,7 +36,7 @@ export default {
 }
 </script>
 <template>
-  <h1 style="text-align: center; line-height: 60px;background-color: #393939; color: #fff;">LOGO</h1>
+  <h1 class="logo">{{isCollapse ? 'CMS': 'MzCMS'}}</h1>
   <el-menu
       class="el-menu-vertical-demo"
       @select="handleSelect"
@@ -69,8 +69,15 @@ export default {
 </template>
 
 <style scoped>
+.logo{
+text-align: center; line-height: 60px;background-color: #393939; color: #fff;
+}
 .el-menu-vertical-demo {
   height: calc(100% - 60px);
+  overflow-y: scroll;
+}
+.el-menu-vertical-demo::-webkit-scrollbar{
+  display: none;
 }
 </style>
 
