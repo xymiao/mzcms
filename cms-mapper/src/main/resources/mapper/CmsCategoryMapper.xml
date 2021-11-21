@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xymiao.cms.mapper.CmsCategoryMapper">
+    <resultMap id="cmsCategoryResultMap" type="com.xymiao.cms.pojo.CmsCategory">
+        <id property="categoryId" column="category_id" />
+        <result property="name" column="name"/>
+        <result property="iconUrl" column="icon_url"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="moduleId" column="module_id"/>
+        <result property="created" column="created"/>
+        <result property="updated" column="updated"/>
+        <result property="userId" column="user_id"/>
+		<result property="sort" column="sort"/>
+ 		<result property="url" column="url"/>
+    </resultMap>
+    <resultMap id="cmsCategoryRelationResultMap" extends="cmsCategoryResultMap" type="com.xymiao.cms.pojo.CmsCategory">
+        <collection property="cmsCategories" select="selectCategoryByParentId"  column="category_id" foreignColumn="parent_id"
+                    ofType="com.xymiao.cms.pojo.CmsCategory" >
+        </collection>
+    </resultMap>
+
+    <select id="queryCategoryList" resultMap="cmsCategoryRelationResultMap">
+        select  * from cms_category where  parent_id = 'parent'  order by sort
+    </select>
+
+    <select id="selectCategoryByParentId" resultType="com.xymiao.cms.pojo.CmsCategory">
+        select  * from cms_category where parent_id = #{category_id, jdbcType=VARCHAR}
+    </select>
+</mapper>
