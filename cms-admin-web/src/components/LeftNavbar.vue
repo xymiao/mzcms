@@ -1,7 +1,53 @@
+<template>
+  <h1 class="logo">{{ isCollapse ? 'CMS' : 'MzCMS' }}</h1>
+  <el-menu
+      class="el-menu-vertical-demo"
+      @select="handleSelect"
+      :collapse="isCollapse"
+      :default-active="$route.path"
+      :title="$route.path"
+      :unique-opened="true"
+      background-color="#393939"
+      text-color="#fff"
+      active-text-color="#ffd04b">
+    <template v-for="menu in menuList" :key="menu.menuId">
+      <el-menu-item index="/" v-if="menu.cmsMenus.length === 0">
+        <el-icon>
+          <menu-icon/>
+        </el-icon>
+        <template #title>{{ menu.menuName }}</template>
+      </el-menu-item>
+      <el-sub-menu :index="menu.url == null ? '#' : menu.url" v-if="menu.cmsMenus.length > 0">
+        <template #title>
+          <el-icon>
+            <location/>
+          </el-icon>
+          <span>{{ menu.menuName }}</span>
+        </template>
+        <el-menu-item :index="subMenu.url == null ? '#' : subMenu.url" v-for="subMenu in menu.cmsMenus">
+          {{ subMenu.menuName }}
+        </el-menu-item>
+      </el-sub-menu>
+    </template>
+  </el-menu>
+  <div style="position: fixed; bottom: 10px; left: 20px;">
+    <el-icon style="color: #fff; font-size: 24px;" v-if="!isCollapse" @click="handleCollapse(true)">
+      <fold/>
+    </el-icon>
+    <el-icon style="color: #fff; font-size: 24px;" v-if="isCollapse" @click="handleCollapse(null)">
+      <expand/>
+    </el-icon>
+  </div>
+</template>
+
 <script lang="ts">
 import {showMenu} from "../api/api_menu";
+import {Menu, Edit, Location, Fold, Expand} from "@element-plus/icons";
 
 export default {
+  components: {
+    Edit, MenuIcon: Menu, Location, Fold, Expand
+  },
   data() {
     return {
       menuList: [],
@@ -35,48 +81,21 @@ export default {
   }
 }
 </script>
-<template>
-  <h1 class="logo">{{isCollapse ? 'CMS': 'MzCMS'}}</h1>
-  <el-menu
-      class="el-menu-vertical-demo"
-      @select="handleSelect"
-      :collapse="isCollapse"
-      :default-active="$route.path"
-      :unique-opened="true"
-      background-color="#393939"
-      text-color="#fff"
-      active-text-color="#ffd04b">
-    <template v-for="menu in menuList" :key="menu.menuId">
-      <el-menu-item index="/" v-if="menu.cmsMenus.length === 0">
-        <i class="el-icon-menu"></i>
-        <template #title>{{ menu.menuName }}</template>
-      </el-menu-item>
-      <el-sub-menu :index="menu.url == null ? '#' : menu.url" v-if="menu.cmsMenus.length > 0">
-        <template #title>
-          <i class="el-icon-location"></i>
-          <span>{{ menu.menuName }}</span>
-        </template>
-        <el-menu-item :index="subMenu.url == null ? '#' : subMenu.url" v-for="subMenu in menu.cmsMenus">{{ subMenu.menuName }}</el-menu-item>
-      </el-sub-menu>
-    </template>
-  </el-menu>
-  <div style="position: fixed; bottom: 10px; left: 20px;">
-    <i class="el-icon-s-fold" v-if="!isCollapse" style="color: #fff; font-size: 24px;"
-       @click="handleCollapse(true)"></i>
-    <i class="el-icon-s-unfold" v-if="isCollapse" style="color: #fff; font-size: 24px;"
-       @click="handleCollapse(false)"></i>
-  </div>
-</template>
 
 <style scoped>
-.logo{
-text-align: center; line-height: 60px;background-color: #393939; color: #fff;
+.logo {
+  text-align: center;
+  line-height: 60px;
+  background-color: #393939;
+  color: #fff;
 }
+
 .el-menu-vertical-demo {
   height: calc(100% - 60px);
   overflow-y: scroll;
 }
-.el-menu-vertical-demo::-webkit-scrollbar{
+
+.el-menu-vertical-demo::-webkit-scrollbar {
   display: none;
 }
 </style>
