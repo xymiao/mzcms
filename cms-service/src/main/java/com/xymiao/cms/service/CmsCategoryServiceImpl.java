@@ -3,32 +3,39 @@ package com.xymiao.cms.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.xymiao.cms.pojo.CmsMenu;
 import com.xymiao.common.exception.BusinessException;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xymiao.cms.mapper.CmsCategoryMapper;
 import com.xymiao.cms.pojo.CmsCategory;
+
 @Service("cmsCategoryServiceImpl")
 public class CmsCategoryServiceImpl implements CmsCategoryService {
 	
-	@Autowired
-	private CmsCategoryMapper cmsCategoryMapper;
+	private final CmsCategoryMapper cmsCategoryMapper;
+
+	public CmsCategoryServiceImpl(CmsCategoryMapper cmsCategoryMapper) {
+		this.cmsCategoryMapper = cmsCategoryMapper;
+	}
+
 	@Override
 	public List<CmsCategory> queryCategoryList() {
 		return cmsCategoryMapper.queryCategoryList("");
 	}
 	@Override
 	public CmsCategory getCategory(String categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+		return cmsCategoryMapper.selectById(categoryId);
 	}
+
+	@Override
+	public CmsCategory getCategoryByUrl(String url) {
+		return cmsCategoryMapper.selectOne(Wrappers.<CmsCategory>lambdaQuery().eq(CmsCategory::getUrl, url));
+	}
+
 	@Override
 	public CmsCategory saveCategory(CmsCategory cmsCategory) {
 		if(Objects.isNull(cmsCategory)){
@@ -60,6 +67,7 @@ public class CmsCategoryServiceImpl implements CmsCategoryService {
 		//删除
 		return cmsCategoryMapper.deleteById(categoryId);
 	}
+
 	private Long listCategoryCountByParentId(String parentId){
 		if(StringUtils.isEmpty(parentId)) return null;
 		return cmsCategoryMapper.selectCount(Wrappers.<CmsCategory>lambdaQuery().eq(CmsCategory::getParentId, parentId));
@@ -69,6 +77,13 @@ public class CmsCategoryServiceImpl implements CmsCategoryService {
 	public List<CmsCategory> listMenuByUser(String string, String module, String string2) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<CmsCategory> listByContentId(String contentId) {
+		String inSql = "select category_id from cms_category_content  where content_id = '" + contentId + "'";
+		return cmsCategoryMapper.selectList(Wrappers.<CmsCategory>lambdaQuery()
+				.inSql(CmsCategory::getCategoryId, inSql).orderByDesc(CmsCategory::getCreated));
 	}
 
 }

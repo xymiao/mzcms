@@ -15,6 +15,7 @@ public class CmsContent {
 	@TableId
 	private String contentId;
 	private String title;
+	private String content;
 	private Long viewNum;
 	private Long commentNum;
 	private String contentState;

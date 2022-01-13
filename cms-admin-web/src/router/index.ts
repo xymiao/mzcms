@@ -6,6 +6,8 @@ const About = () => import('../pages/About.vue')
 const NotFound = () => import( '../pages/NotFound.vue')
 const Login = () => import('../pages/Login.vue')
 const Content = () => import('../pages/Content.vue')
+const ContentAdd = () => import('../pages/ContentAdd.vue')
+const ContentEdit = () => import('../pages/ContentEdit.vue')
 const ContentCategory = () => import('../pages/ContentCategory.vue')
 const MenuMange = () => import('../pages/MenuMange.vue')
 const SiteSetting = () => import('../pages/SiteSetting.vue')
@@ -23,7 +25,15 @@ const routes = [
             },
             {
                 path: 'content_manage',
-                component: Content, name: 'content',
+                component: Content, name: 'content_manage',
+            },
+            {
+                path: 'content_add',
+                component: ContentAdd, name: 'content_add',
+            },
+            {
+                path: 'content_edit/:id',
+                component: ContentEdit, name: 'content_edit',
             },
             {
                 path: 'content_category',

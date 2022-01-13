@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<th:block th:fragment="menu">
+    <div class="container-fluid bg-white sticky-top "  style="font-size: 16px; padding-left: 0; padding-right: 0;">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between  mb-4 border-bottom text-white">
+            <a href="/" class="d-flex align-items-center col-md-3 mb-4 mb-md-0 text-dark text-decoration-none">
+                <img src="/res/img/logo.png" alt="知识&技术&梦想"
+                     class="d-inline-block align-text-top"/>
+                <span class="badge bg-secondary">知识&技术&梦想</span>
+            </a>
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li  th:each="menu : ${list}"><a class="nav-link px-2 link-secondary"  th:href="${menu.url}" th:text="${menu.menuName}"></a></li>
+            </ul>
+            <div class="col-md-3 text-end ">
+                <!-- <button type="button" class="btn btn-light me-2">登录</button> -->
+            </div>
+        </header>
+    </div>
+</th:block>
+
+</body>
+</html>

@@ -2,14 +2,17 @@ package com.xymiao.cms.util;
 
 import com.xymiao.cms.pojo.auth.SysUser;
 import com.xymiao.cms.service.user.SysUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserUtils {
-    @Autowired
-    private SysUserService sysUserService;
+    private  SysUserService sysUserService;
+
+    public UserUtils(SysUserService sysUserService) {
+        this.sysUserService = sysUserService;
+    }
+
     public  String getName(){
         String userName  = SecurityContextHolder.getContext().getAuthentication().getName();;
         return userName;

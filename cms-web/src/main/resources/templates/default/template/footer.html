@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<th:block th:fragment="footer">
+    <footer class="py-5">
+        <div class="row">
+            <div class="col-2">
+                <h5>主导航</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">首页</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">学习路线</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">知识库</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">问题列表</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">关于</a></li>
+                </ul>
+            </div>
+
+            <div class="col-2">
+                <h5>站点分发</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">公众号</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">百家号</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">今日头条</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">B 站</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">其他</a></li>
+                </ul>
+            </div>
+
+            <div class="col-2">
+                <h5>有需求吗？</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                </ul>
+            </div>
+
+            <div class="col-4 offset-1">
+                <form>
+                    <h5>关注公众号</h5>
+                    <p>订阅最新的文档内容和更新.</p>
+                    <div class="d-flex w-100 gap-2">
+                        <input id="newsletter1" type="text" class="form-control" placeholder="苗子说全栈">
+                        <button class="btn btn-primary" type="button">关注</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between py-4 my-4 border-top">
+            <p>&copy; 2021 Copyright. MzCMS 版权所有 豫ICP备210252655号-2</p>
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3"><a class="link-dark" href="#">
+                    <svg class="bi" width="24" height="24">
+                        <use xlink:href="#twitter"/>
+                    </svg>
+                </a></li>
+                <li class="ms-3"><a class="link-dark" href="#">
+                    <svg class="bi" width="24" height="24">
+                        <use xlink:href="#instagram"/>
+                    </svg>
+                </a></li>
+                <li class="ms-3"><a class="link-dark" href="#">
+                    <svg class="bi" width="24" height="24">
+                        <use xlink:href="#facebook"/>
+                    </svg>
+                </a></li>
+            </ul>
+        </div>
+    </footer>
+</th:block>
+
+</body>
+</html>

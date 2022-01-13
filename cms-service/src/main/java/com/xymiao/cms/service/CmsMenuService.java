@@ -45,6 +45,13 @@ public interface CmsMenuService {
     int delMenu(String menuId);
 
     /**
+     * 根据模块类型加载前端的首页导航菜单。
+     * @param module 模块类型
+     * @return 内容分类
+     */
+    List<CmsMenu> listMenuByFront(String module);
+
+    /**
      * 根据用户信息加载对应的菜单信息
      * @param module
      * @param left_nav

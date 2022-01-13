@@ -65,6 +65,17 @@ COMMENT = '内容表';
 
 ```
 
+```mysql
+CREATE TABLE `mzcms`.`cms_category_content` (
+  `cc_id` VARCHAR(32) NOT NULL COMMENT '主键',
+  `category_id` VARCHAR(32) NULL COMMENT '分类id',
+  `content_id` VARCHAR(32) NULL COMMENT '内容id',
+  `created` DATETIME NULL COMMENT '创建时间',
+  `creater` VARCHAR(32) NULL COMMENT '创建人',
+  PRIMARY KEY (`cc_id`))
+COMMENT = '分类内容关联表';
+```
+
 
 ### 用户相关的表
 ```mysql

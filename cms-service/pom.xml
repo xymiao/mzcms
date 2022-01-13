@@ -11,6 +11,7 @@
     <groupId>com.xymiao.cms</groupId>
     <artifactId>cms-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>cms-service</name>
     <description>cms-service</description>
     <properties>
@@ -53,6 +54,12 @@
             <optional>true</optional>
         </dependency>
 
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.14.3</version>
+		</dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -68,10 +75,7 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+
         </plugins>
     </build>
 

@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xymiao.cms.mapper.CmsMenuMapper;
+import com.xymiao.cms.pojo.CmsCategory;
 import com.xymiao.cms.pojo.CmsMenu;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Service("cmsMenuServiceImpl")
-public class CmsMenuServiceImpl  implements  CmsMenuService{
+public class CmsMenuServiceImpl implements CmsMenuService {
     private final static Logger logger = LoggerFactory.getLogger(CmsMenuServiceImpl.class);
-    private  CmsMenuMapper cmsMenuMapper;
+    private CmsMenuMapper cmsMenuMapper;
+
     @Autowired
     public CmsMenuServiceImpl(CmsMenuMapper cmsMenuMapper) {
         this.cmsMenuMapper = cmsMenuMapper;
@@ -26,7 +29,7 @@ public class CmsMenuServiceImpl  implements  CmsMenuService{
 
     @Override
     public CmsMenu saveMenu(CmsMenu cmsMenu) {
-        if(Objects.isNull(cmsMenu)){
+        if (Objects.isNull(cmsMenu)) {
             return null;
         }
         cmsMenu.setMenuId(IdWorker.get32UUID());
@@ -34,7 +37,7 @@ public class CmsMenuServiceImpl  implements  CmsMenuService{
         cmsMenu.setCreated(LocalDateTime.now());
         cmsMenu.setLastDate(LocalDateTime.now());
         int rows = cmsMenuMapper.insert(cmsMenu);
-        if(rows <= 0){
+        if (rows <= 0) {
             return null;
         }
         return cmsMenu;
@@ -46,9 +49,9 @@ public class CmsMenuServiceImpl  implements  CmsMenuService{
     }
 
     @Override
-    public  Page<CmsMenu> listMenu(String module, String type, Integer current, Integer size) {
+    public Page<CmsMenu> listMenu(String module, String type, Integer current, Integer size) {
         Page<CmsMenu> cmsMenuPage = cmsMenuMapper.selectPage(new Page<>(current, size),
-                Wrappers.<CmsMenu>lambdaQuery().eq(CmsMenu::getParentId, "parent").eq(CmsMenu::getMenuModule, module).eq(CmsMenu::getMenuType, type) );
+                Wrappers.<CmsMenu>lambdaQuery().eq(CmsMenu::getParentId, "parent").eq(CmsMenu::getMenuModule, module).eq(CmsMenu::getMenuType, type));
         List<CmsMenu> cmsMenus = cmsMenuMapper.queryMenuList("backend");
         cmsMenuPage.setRecords(cmsMenus);
         logger.info("数据信息： {}", cmsMenus);
@@ -57,7 +60,7 @@ public class CmsMenuServiceImpl  implements  CmsMenuService{
 
     @Override
     public int updateMenu(CmsMenu cmsMenu) {
-        if(Objects.isNull(cmsMenu)){
+        if (Objects.isNull(cmsMenu)) {
             return 0;
         }
         cmsMenu.setLastDate(LocalDateTime.now());
@@ -73,6 +76,16 @@ public class CmsMenuServiceImpl  implements  CmsMenuService{
         cmsMenu.setLastDate(LocalDateTime.now());
         int rows = cmsMenuMapper.update(cmsMenu, Wrappers.<CmsMenu>lambdaQuery().eq(CmsMenu::getMenuId, menuId));
         return rows;
+    }
+
+    @Override
+    public List<CmsMenu> listMenuByFront(String module) {
+        if (StringUtils.isEmpty(module)) {
+            return null;
+        }
+        return cmsMenuMapper.selectList(Wrappers.<CmsMenu>lambdaQuery()
+                .eq(CmsMenu::getMenuModule, module)
+                .eq(CmsMenu::getMenuType, "top_nav"));
     }
 
     @Override

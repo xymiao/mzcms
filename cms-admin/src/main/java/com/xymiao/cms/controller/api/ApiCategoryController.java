@@ -19,12 +19,12 @@ import java.util.List;
 public class ApiCategoryController {
     private final static Logger logger = LoggerFactory.getLogger(ApiCategoryController.class);
     private final CmsCategoryService cmsCategoryService;
-    @Autowired
-    private UserUtils userUtils;
+    private final UserUtils userUtils;
 
     @Autowired
-    public ApiCategoryController(CmsCategoryService cmsCategoryService) {
+    public ApiCategoryController(CmsCategoryService cmsCategoryService, UserUtils userUtils) {
         this.cmsCategoryService = cmsCategoryService;
+        this.userUtils = userUtils;
     }
 
     /**
