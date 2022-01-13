@@ -6,10 +6,7 @@
       :collapse="isCollapse"
       :default-active="$route.path"
       :title="$route.path"
-      :unique-opened="true"
-      background-color="#393939"
-      text-color="#fff"
-      active-text-color="#ffd04b">
+      :unique-opened="true">
     <template v-for="menu in menuList" :key="menu.menuId">
       <el-menu-item index="/" v-if="menu.cmsMenus.length === 0">
         <el-icon>
@@ -31,10 +28,10 @@
     </template>
   </el-menu>
   <div style="position: fixed; bottom: 10px; left: 20px;">
-    <el-icon style="color: #fff; font-size: 24px;" v-if="!isCollapse" @click="handleCollapse(true)">
+    <el-icon style="color: #333; font-size: 24px;" v-if="!isCollapse" @click="handleCollapse(true)">
       <fold/>
     </el-icon>
-    <el-icon style="color: #fff; font-size: 24px;" v-if="isCollapse" @click="handleCollapse(null)">
+    <el-icon style="color: #333; font-size: 24px;" v-if="isCollapse" @click="handleCollapse(false)">
       <expand/>
     </el-icon>
   </div>
@@ -51,12 +48,11 @@ export default {
   data() {
     return {
       menuList: [],
+	  isCollapse: this.$store.getters.isCollapse,
     }
   },
   computed: {
-    isCollapse() {
-      return this.$store.getters.isCollapse;
-    }
+    
   },
   created() {
     this.showMenuList();
@@ -75,8 +71,9 @@ export default {
       this.$router.push(key);
     },
     handleCollapse(value) {
+		console.log(value)
+	  this.isCollapse = value;
       this.$store.commit("useMenuCollapse", value);
-
     }
   }
 }
@@ -86,8 +83,7 @@ export default {
 .logo {
   text-align: center;
   line-height: 60px;
-  background-color: #393939;
-  color: #fff;
+  color: #000;
 }
 
 .el-menu-vertical-demo {

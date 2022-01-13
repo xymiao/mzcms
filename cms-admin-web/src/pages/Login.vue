@@ -1,13 +1,13 @@
 <template>
-  <el-row class="row-bg" justify="center" style="padding-top: 100px;">
-    <el-col :xs="10" :sm="12" :md="6" :lg="6" :xl="11">
+  <el-row class="row-bg" justify="center" style="padding-top: 160px;">
+    <el-col :xs="20" :sm="12" :md="6" :lg="6" :xl="11">
       <el-card class="box-card">
         <div style="font-size: 24px; padding: 10px 0; text-align: center;">用户登录</div>
         <el-form-item prop="username">
         <el-input v-model="username" placeholder="请输入用户名" ></el-input>
         </el-form-item>
         <el-form-item prop="pwd">
-        <el-input placeholder="请输入密码" v-model="pwd" show-password></el-input>
+        <el-input placeholder="请输入密码" v-model="pwd" @keyup.enter="login"  show-password></el-input>
         </el-form-item>
         <el-button type="primary" @click="login" style="width: 100%;">登录</el-button>
       </el-card>

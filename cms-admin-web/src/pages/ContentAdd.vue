@@ -14,9 +14,9 @@
 
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="基础内容" name="first">
-        <el-form ref="form" :model="form" label-width="120px">
+        <el-form label-width="120px">
           <el-form-item label="标题">
-            <el-input v-model="form.name"></el-input>
+            <el-input v-model="form.title"></el-input>
           </el-form-item>
           <el-form-item label="所属分类">
             <el-select v-model="form.region" placeholder="请选择分类">
@@ -34,18 +34,17 @@
       </el-tab-pane>
       <el-tab-pane label="SEO选项" name="second">
         <el-form
-            :label-position="labelPosition"
-            label-width="100px"
-            :model="formLabelAlign"
+          :label-position="labelPosition"
+          label-width="100px"
         >
           <el-form-item label="SEO标题">
-            <el-input v-model="formLabelAlign.name"></el-input>
+            <el-input v-model="form.title"></el-input>
           </el-form-item>
           <el-form-item label="SEO关键字">
-            <el-input v-model="formLabelAlign.region"></el-input>
+            <el-input v-model="form.region"></el-input>
           </el-form-item>
           <el-form-item label="SEO描述">
-            <el-input v-model="formLabelAlign.type"></el-input>
+            <el-input v-model="form.type"></el-input>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -54,82 +53,63 @@
   </el-card>
 </template>
 
-<script>
-import {listCategory} from "../api/api_category";
-import {listContent} from "../api/api_content";
-import WangEditorEdit from "./WangEditorEdit.vue"
+<script lang="ts">
+import { putContent } from "../api/api_content";
+import WangEditorEdit from "./WangEditorEdit.vue";
+import { ref, reactive, toRefs, provide } from "vue";
+import { useRouter } from "vue-router";
+import { ElMessage } from 'element-plus'
+
 
 export default {
-  components: {WangEditorEdit},
-  data() {
+  components: { WangEditorEdit },
+  setup() {
+    const route = useRouter();
+    const form = ref({
+      title: "",
+      region: "",
+      date1: "",
+      date2: "",
+      delivery: false,
+      type: "",
+      resource: "",
+      desc: "",
+      content: ""
+    });
+    const activeName = ref("first");
+    const labelPosition = ref("right");
+    const handleClick = async (data) => {
+      console.log(data);
+    };
+    const onSubmit = async () => {
+      if(editContent.value == ""){
+          ElMessage('内容不能为空！');
+          return false;
+      }
+      form.value.content = editContent.value;
+      putContent(form.value).then((res) => {
+          console.log(res);
+          ElMessage(res.message);
+          if(res.rcode == 0){
+            route.push("/content_manage");
+          }
+      });
+    };
+    const editContent = ref("");
+    const updateEditContent = (text) => {
+      editContent.value = text;
+    };
+    provide("updateEditContent", updateEditContent);
+
     return {
-      categoryList: [],
-      activeName: 'first',
-      defaultProps: {
-        children: 'cmsCategories',
-        label: 'label',
-      },
-      categoryId: '',
-      contentList: [],
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: '',
-      },
-      labelPosition: 'right',
-      formLabelAlign: {
-        name: '',
-        region: '',
-        type: '',
-      },
-    }
+      form,
+      activeName,
+      labelPosition,
+      handleClick,
+      onSubmit,
+    };
   },
-  created() {
-    this.loadCategoryList();
-  },
-  computed: {
-    dataSource() {
-      return JSON.parse(JSON.stringify(this.categoryList));
-    },
-  },
-  methods: {
-    goBack() {
-      console.log("go back")
-    },
-    handleClick(tab, event) {
-      console.log(tab, event)
-    },
-    onSubmit() {
-      console.log('submit!')
-    },
-    loadContentList() {
-      let data = {categoryId: this.categoryId};
-      listContent(data).then((res) => {
-        console.log(res.data);
-        this.contentList = res.data;
-        console.log("category", this.categoryList);
-      });
-    },
-    loadCategoryList() {
-      let data = {module: 'backend'};
-      listCategory(data).then((res) => {
-        console.log(res.data);
-        this.categoryList = res.data;
-        this.categoryId = this.categoryList[0].categoryId;
-        console.log("category", this.categoryList);
-        this.loadContentList();
-      });
-    },
-    handleNodeClick(data) {
-      console.log(data)
-    },
-  }
-}
+};
 </script>
 
 <style>
