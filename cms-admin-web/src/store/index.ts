@@ -7,6 +7,7 @@ export  const store = createStore({
             userSession: '1',
             userToken: '',
             isCollapse: false,
+            leftNavbarList: [],
         }
     },
     getters: {
@@ -19,6 +20,9 @@ export  const store = createStore({
         userToken: (state) =>{
             return state.userToken;
         },
+        getLeftNavBarList: (state) =>{
+            return state.leftNavbarList;
+        }
     },
     mutations: {
         useMenuCollapse(state, value){
@@ -37,6 +41,9 @@ export  const store = createStore({
             state.userSession = "1";
             state.userToken = "";
         },
+        setLeftNavBarList(state, info){
+            state.leftNavbarList = info;
+        }
     }
 })
 export  default { store }

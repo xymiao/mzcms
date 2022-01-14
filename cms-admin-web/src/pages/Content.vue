@@ -27,7 +27,7 @@
       </el-col>
       <el-col :span="20">
         <el-table :data="contentList" border style="width: 100%">
-          <el-table-column prop="contentId" label="ID" width="80"></el-table-column>
+         <!--     <el-table-column prop="contentId" label="ID" width="80"></el-table-column>-->
           <el-table-column prop="title" label="内容" ></el-table-column>
 <!--          <el-table-column prop="viewNum" label="浏览"></el-table-column>
           <el-table-column prop="commentNum" label="评论数"></el-table-column>
@@ -58,7 +58,7 @@
   </el-card>
 </template>
 
-<script>
+<script lang="ts">
 import {listCategory} from "../api/api_category";
 import {listContent} from "../api/api_content";
 

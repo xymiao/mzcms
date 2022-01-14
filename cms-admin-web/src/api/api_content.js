@@ -13,7 +13,7 @@ export  const putContent = (data) => {
     return axios({url: '/api/v1/content/put', method: 'post', data});
 }
 
-export  const editContent= (data) => {
+export  const editContentPost= (data) => {
     return axios({url: '/api/v1/content/edit' , method: 'post', data});
 }
 

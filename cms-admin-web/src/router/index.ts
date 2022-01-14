@@ -60,13 +60,12 @@ export const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-    // ...
     let isLogin = store.getters.isLogin;
-    console.log(to, "导航守卫， 是不是类似过滤器的概念？", from, isLogin);
+    //console.log(to, "导航守卫， 是不是类似过滤器的概念？", from, isLogin);
     //判断用户是否登录
     if (to.name !== "Login" && isLogin == "1") {
         router.push("/login");
-        console.log("跳转登录页面");
+        console.log("没有登录，跳转登录页面");
         return false;
     } else {
         return true;

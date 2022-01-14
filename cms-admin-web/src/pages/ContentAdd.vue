@@ -96,6 +96,7 @@ export default {
       });
     };
     const editContent = ref("");
+    provide("editType", "add");
     const updateEditContent = (text) => {
       editContent.value = text;
     };

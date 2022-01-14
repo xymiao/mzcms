@@ -44,18 +44,6 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <div class="block">
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          v-model:currentPage="menuList.current"
-          :page-size="menuList.size"
-          layout="total, prev, pager, next"
-          :total="menuList.total"
-      >
-      </el-pagination>
-    </div>
   </el-card>
 
   <el-drawer
@@ -155,18 +143,18 @@ export default {
     loadMenuList() {
       let data = {module: 'backend', currPage: this.menuList.current};
       listMenu(data).then(res => {
-        console.log(res.data);
+        //console.log(res.data);
         this.menuList = res.data;
-        console.log("menu", this.menuList)
+        //console.log("menu", this.menuList)
       });
     },
     handleEdit(index, value) {
-      console.log(index, value);
+      //console.log(index, value);
       this.editMenu = value;
       this.editMenuVisible = true;
     },
     handleAddSubMenu(scope) {
-      console.log(scope);
+      //console.log(scope);
       this.form.parentId = scope.row.menuId;
       this.parentName = scope.row.menuName;
       this.addMenuVisible = true;
