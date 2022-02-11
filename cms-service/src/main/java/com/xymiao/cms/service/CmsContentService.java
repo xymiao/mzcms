@@ -24,4 +24,6 @@ public interface CmsContentService {
     CmsContent getContent(String id);
     
 	CmsContent saveContent(CmsContent cmsContent);
+
+	int updateCotent(CmsContent cmsContent);
 }

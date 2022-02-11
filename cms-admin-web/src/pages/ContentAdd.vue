@@ -1,17 +1,6 @@
 <template>
+<el-page-header content="新增内容" @back="goBack" title="返回" style="    padding-bottom: 10px;"/>
   <el-card class="box-card">
-    <template #header>
-      <div class="card-header">
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>内容新增</el-breadcrumb-item>
-        </el-breadcrumb>
-        <el-button class="button" type="text">
-          <router-link to="/content_manage">返回</router-link>
-        </el-button>
-      </div>
-    </template>
-
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="基础内容" name="first">
         <el-form label-width="120px">
@@ -28,7 +17,7 @@
             <WangEditorEdit></WangEditorEdit>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">提交内容</el-button>
+            <el-button type="primary" @click="onSubmit" v-debounce="onSubmit">提交内容</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -95,6 +84,9 @@ export default {
           }
       });
     };
+    const goBack = ()=>{
+      route.push("/content_manage");
+    }
     const editContent = ref("");
     provide("editType", "add");
     const updateEditContent = (text) => {
@@ -108,6 +100,7 @@ export default {
       labelPosition,
       handleClick,
       onSubmit,
+      goBack,
     };
   },
 };

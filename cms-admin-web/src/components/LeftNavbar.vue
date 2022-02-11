@@ -21,12 +21,11 @@
       >
         <template #title>
           <el-icon>
-            <location />
+          <component :is="menu.iconUrl" />
           </el-icon>
-          <span>{{ menu.menuName }}</span>
+          <span> {{ menu.menuName }}</span>
         </template>
-        <el-menu-item
-          :index="subMenu.url == null ? '#' : subMenu.url"
+        <el-menu-item :index="subMenu.url == null ? '#' : subMenu.url"
           v-for="subMenu in menu.cmsMenus"
         >
           {{ subMenu.menuName }}
@@ -54,7 +53,7 @@
 
 <script lang="ts">
 import { showMenu } from "../api/api_menu";
-import { Menu, Edit, Location, Fold, Expand } from "@element-plus/icons";
+import { Document, Tickets, Setting, User, Menu, Edit, Location, Fold, Expand } from "@element-plus/icons";
 
 export default {
   components: {
@@ -63,6 +62,10 @@ export default {
     Location,
     Fold,
     Expand,
+    Setting, 
+    User,
+    Tickets,
+    Document
   },
   data() {
     return {

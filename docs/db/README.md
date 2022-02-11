@@ -18,6 +18,7 @@ CREATE TABLE `mzcms`.`cms_menu` (
 `created` DATETIME NULL COMMENT '创建时间' ,
 `last_date` DATETIME NULL COMMENT '最后更新时间',
 `url` VARCHAR(200) NULL COMMENT  '请求地址',
+`icon_url` VARCHAR(200) NULL COMMENT  '菜单图标',
 PRIMARY KEY (`menu_id`))
 COMMENT = '菜单表';
 

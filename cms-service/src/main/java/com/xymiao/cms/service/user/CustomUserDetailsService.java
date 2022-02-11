@@ -25,8 +25,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(sysUser);
     }
     static final class CustomUserDetails extends SysUser implements UserDetails {
-
-        private static final List<GrantedAuthority> ROLE_USER = Collections
+		private static final long serialVersionUID = 6916027547378258066L;
+		private static final List<GrantedAuthority> ROLE_USER = Collections
                 .unmodifiableList(AuthorityUtils.createAuthorityList("ROLE_USER"));
 
         CustomUserDetails(SysUser sysUser) {

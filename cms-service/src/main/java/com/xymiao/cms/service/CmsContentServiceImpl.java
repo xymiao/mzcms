@@ -1,13 +1,12 @@
 package com.xymiao.cms.service;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xymiao.cms.mapper.CmsContentMapper;
 import com.xymiao.cms.pojo.CmsContent;
 import com.xymiao.common.exception.BusinessException;
+import com.xymiao.common.utils.IdsUtils;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +49,7 @@ public class CmsContentServiceImpl implements CmsContentService {
 	public CmsContent saveContent(CmsContent cmsContent) {
 		LocalDateTime currDate = LocalDateTime.now();
 		
-		cmsContent.setContentId(IdWorker.get32UUID());
+		cmsContent.setContentId(IdsUtils.getId());
 		cmsContent.setPublishDate(currDate);
 		String t = Jsoup.parse(cmsContent.getContent()).text();
 		String c = t.substring(0, t.length() < 100 ? t.length() : 100);
@@ -60,5 +59,10 @@ public class CmsContentServiceImpl implements CmsContentService {
 			throw new BusinessException("内容保存失败！");
 		}
 		return cmsContent;
+	}
+
+	@Override
+	public int updateCotent(CmsContent cmsContent) {
+		return cmsContentMapper.updateById(cmsContent);
 	}
 }

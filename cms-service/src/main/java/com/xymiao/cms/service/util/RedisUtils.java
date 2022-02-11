@@ -2,7 +2,6 @@ package com.xymiao.cms.service.util;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import javax.annotation.Resource;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.*;

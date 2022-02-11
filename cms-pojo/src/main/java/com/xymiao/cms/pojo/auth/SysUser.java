@@ -9,7 +9,8 @@ import java.util.Objects;
 
 @TableName("SYS_USER")
 public class SysUser implements Serializable {
-    @TableId
+	private static final long serialVersionUID = 8500471145406713820L;
+	@TableId
     private String userId;
     private String nickName;
     private String loginId;

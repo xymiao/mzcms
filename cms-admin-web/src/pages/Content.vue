@@ -56,6 +56,7 @@
       </el-col>
     </el-row>
   </el-card>
+   <el-backtop />
 </template>
 
 <script lang="ts">

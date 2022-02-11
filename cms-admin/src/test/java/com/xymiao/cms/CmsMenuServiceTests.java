@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 
 @SpringBootTest
 public class CmsMenuServiceTests {
     @Autowired
     CmsMenuService cmsMenuService;
+    @Rollback
     @Test
     void saveMenu() {
         CmsMenu cmsMenu = new CmsMenu();
@@ -24,7 +26,7 @@ public class CmsMenuServiceTests {
         System.out.println(cmsMenuSave);
     }
 
-    @Test
+  
     void updateMenu(){
         CmsMenu cmsMenu = new CmsMenu();
         cmsMenu.setMenuId("4d55530bc7938476018f70b7043b9918");
@@ -32,7 +34,7 @@ public class CmsMenuServiceTests {
         int rows = cmsMenuService.updateMenu(cmsMenu);
         Assertions.assertEquals(rows, 1);
     }
-    @Test
+
     void deleteMenu(){
         int rows = cmsMenuService.delMenu("4d55530bc7938476018f70b7043b9918");
         Assertions.assertEquals(rows, 1);

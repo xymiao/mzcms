@@ -26,6 +26,7 @@ public class CmsMenu {
     private LocalDateTime created;
     private LocalDateTime lastDate;
     private String url;
+    private String iconUrl;
 
     @TableField(exist = false)
     private List<CmsMenu> cmsMenus;

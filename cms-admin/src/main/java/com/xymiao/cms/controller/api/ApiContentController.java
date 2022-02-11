@@ -49,4 +49,18 @@ public class ApiContentController {
        CmsContent cc = cmsContentService.saveContent(cmsContent);
        return ResponseBodyUtils.createBySuccessCodeMessage("内容保存成功！", cc);
    }
+   
+   /**
+    * 编辑内容
+    * @param cmsContent
+    * @return
+    */
+   @PostMapping(value="edit")
+   public ResponseBodyUtils<Object> editMenu(@RequestBody  CmsContent cmsContent){
+       logger.info("获取修改内容：{}", cmsContent);
+       int rows  = cmsContentService.updateCotent(cmsContent);
+       String msg = rows > 0 ? "修改成功" : "修改失败";
+       return ResponseBodyUtils.createBySuccessCodeMessage(msg, rows);
+   }
+   
 }

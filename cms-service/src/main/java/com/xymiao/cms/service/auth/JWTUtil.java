@@ -30,7 +30,7 @@ public class JWTUtil {
     private final static long EXPIRE_TIME_REMEMBER = 7 * 24 * 60 * 60 * 1000;
 
     // 创建token
-    public static String createToken(String username, List role, String secret, boolean rememberMe) {
+    public static String createToken(String username, List<?> role, String secret, boolean rememberMe) {
 
         Date expireDate = rememberMe ? new Date(System.currentTimeMillis() + EXPIRE_TIME_REMEMBER) : new Date(System.currentTimeMillis() + EXPIRE_TIME);
         try {
@@ -58,6 +58,7 @@ public class JWTUtil {
                     .build();
             // 验证token
             DecodedJWT decodedJWT = verifier.verify(token);
+            log.info("{}", decodedJWT);
             return true;
         } catch (JWTVerificationException jwtVerificationException) {
             log.warn("token验证失败");

@@ -36,6 +36,7 @@ export  const store = createStore({
         userExit(state){
             state.userSession = "1";
             state.userToken = "";
+            state.leftNavbarList = [];
         },
         userClean(state){
             state.userSession = "1";
