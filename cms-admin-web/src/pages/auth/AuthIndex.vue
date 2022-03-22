@@ -1,5 +1,5 @@
 <template>
-  <div>关于页面</div>
+  <div>权限主页</div>
 </template>
 
 <script>

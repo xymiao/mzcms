@@ -1,5 +1,5 @@
 <template>
-  <div>关于页面</div>
+  <div>用户列表</div>
 </template>
 
 <script>

@@ -11,7 +11,7 @@ export  const store = createStore({
         }
     },
     getters: {
-        isLogin: (state) => {
+        isLogin: (state: any) => {
             return state.userSession;
         },
         isCollapse: (state) =>{

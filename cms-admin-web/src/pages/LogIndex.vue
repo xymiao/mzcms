@@ -1,5 +1,5 @@
 <template>
-  <div>关于页面</div>
+  <div>日志管理</div>
 </template>
 
 <script>

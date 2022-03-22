@@ -12,8 +12,7 @@
         style="width: 100%;margin-bottom: 20px;"
         row-key="menuId"
         border
-        :tree-props="{children: 'cmsMenus', hasChildren: 'hasChildren'}"
-    >
+        :tree-props="{children: 'cmsMenus', hasChildren: 'hasChildren'}">
       <el-table-column prop="menuName" label="名称" sortable width="180">
       </el-table-column>
       <el-table-column prop="url" label="URL" sortable width="180">
@@ -21,16 +20,12 @@
       <el-table-column prop="sort" label="排序" sortable width="180">
       </el-table-column>
       <el-table-column prop="menuInfo" label="菜单描述"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="220">
+      <el-table-column fixed="right" label="操作" width="240">
         <template #default="scope">
-          <el-button size="mini" @click="handleAddSubMenu(scope)"
-          >新增
-          </el-button
-          >
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-          >编辑
-          </el-button
-          >
+          <el-button size="mini" @click="handleAddSubMenu(scope)">新增
+          </el-button>
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑
+          </el-button>
           <el-popconfirm title="确定要删除该菜单吗?"
                          confirm-button-text="确认"
                          cancel-button-text="取消"
@@ -104,7 +99,7 @@
 
 <script lang="ts">
 
-import {listMenu, putMenu, editMenu, delMenu} from '../api/api_menu'
+import {delMenu, editMenu, listMenu, putMenu} from '../api/api_menu'
 import {ElMessage} from "element-plus";
 import MenuAdd from "./MenuAdd.vue";
 

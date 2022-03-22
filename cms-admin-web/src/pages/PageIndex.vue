@@ -1,5 +1,5 @@
 <template>
-  <div>关于页面</div>
+  <div>自定义页面</div>
 </template>
 
 <script>

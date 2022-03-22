@@ -8,9 +8,11 @@
         </el-button>
       </div>
     </template>
+{{categoryList}}
+    <el-tree :data="categoryList" :props="defaultProps" @node-click="handleNodeClick"/>
 
     <el-tree
-        :data="dataSource"
+        :data="categoryList"
         node-key="categoryId"
         :props="defaultProps"
         default-expand-all
@@ -21,7 +23,7 @@
           <span>
             <span>{{ node.data.sort }}</span>
             &nbsp;  &nbsp;
-              <el-icon >
+              <el-icon>
                 <template v-if="node.data.status == '1'">
                   <Open/>
                 </template>
@@ -53,94 +55,163 @@
   <category-edit :edit-info="editInfo" :edit-form="editForm" @refresh="refreshData"></category-edit>
 </template>
 
-<script lang="ts">
-import {listCategory, delCategory} from "../api/api_category";
+<script lang="ts" setup>
+import {ref} from 'vue'
+import {delCategory, listCategory} from "../api/api_category";
 import CategoryAdd from "./CategoryAdd.vue";
 import CategoryEdit from "./CategoryEdit.vue";
-import {Plus, Edit, Delete, CircleClose, Open} from "@element-plus/icons";
+import {CircleClose, Delete, Edit, Open, Plus} from "@element-plus/icons";
 import {ElMessage} from 'element-plus'
 
-let id = 1000;
-export default {
-  data() {
-    return {
-      addInfo: {title: "新增分类", addVisible: false, modal: true},
-      editInfo: {title: "修改分类", addVisible: false, modal: true},
-      categoryList: [],
-      defaultProps: {
-        children: "cmsCategories",
-        label: "name",
-      },
-      form: {parentId: "parent", moduleId: 'backend'},
-      editForm: {},
-    };
-  },
-  components: {
-    CategoryAdd,
-    CategoryEdit,
-    Plus,
-    Delete,
-    Edit, Open, CircleClose
-  },
-  computed: {
-    dataSource() {
-      return JSON.parse(JSON.stringify(this.categoryList));
-    },
-  },
-  created() {
-    this.loadCategoryList();
-  },
-  methods: {
-    goBack() {
-      console.log("go back");
-    },
-    loadCategoryList() {
-      let data = {module: 'backend'};
-      listCategory(data).then((res) => {
-        console.log(res.data);
-        this.categoryList = res.data;
-        console.log("category", this.categoryList);
-      });
-    },
-    openAdd(parent, node) {
-      this.addInfo.addVisible = true;
-      this.form.moduleId = 'backend';
-      if (node) {
-        this.addInfo.title = "添加 " + node.data.name + " 子类别"
-        this.form.parentId = node.data.categoryId;
-        console.log(parent, node.data);
-      } else {
-        this.addInfo.title = "添加类别"
-        this.form.parentId = "parent";
-      }
-    },
-    openEdit(node) {
-      console.log("openEdit: ", node.data);
-      this.editInfo.addVisible = true;
-      this.editForm = node.data;
-    },
-    remove(node, data) {
-      console.log("node", node);
-      delCategory({categoryId: node.data.categoryId}).then((res) => {
-        console.log(res)
-        if (res.rcode == 0) {
-          ElMessage({
-            message: res.message || '删除成功',
-            type: 'success',
-          });
-          this.loadCategoryList();
-        } else {
-          ElMessage.error(res.message);
-        }
-      });
-    },
-    refreshData() {
-      this.loadCategoryList();
-      this.form = {};
-    },
+interface Tree {
+  label: string
+  children?: Tree[]
+}
 
+const handleNodeClick = (data: Tree) => {
+  console.log(data)
+}
+
+const data: Tree[] = [
+  {
+    label: 'Level one 1',
+    children: [
+      {
+        label: 'Level two 1-1',
+        children: [
+          {
+            label: 'Level three 1-1-1',
+          },
+        ],
+      },
+    ],
   },
+  {
+    label: 'Level one 2',
+    children: [
+      {
+        label: 'Level two 2-1',
+        children: [
+          {
+            label: 'Level three 2-1-1',
+          },
+        ],
+      },
+      {
+        label: 'Level two 2-2',
+        children: [
+          {
+            label: 'Level three 2-2-1',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Level one 3',
+    children: [
+      {
+        label: 'Level two 3-1',
+        children: [
+          {
+            label: 'Level three 3-1-1',
+          },
+        ],
+      },
+      {
+        label: 'Level two 3-2',
+        children: [
+          {
+            label: 'Level three 3-2-1',
+          },
+        ],
+      },
+    ],
+  },
+]
+
+
+let id = 1000;
+//export default {
+/*
+data()
+{
+  return {
+    addInfo: {title: "新增分类", addVisible: false, modal: true},
+    editInfo: {title: "修改分类", addVisible: false, modal: true},
+    categoryList: [],
+    defaultProps: {
+      children: "cmsCategories",
+      label: "name",
+    },
+    form: {parentId: "parent", moduleId: 'backend'},
+    editForm: {},
+  };
+}
+*/
+const addInfo = {title: "新增分类", addVisible: false, modal: true};
+const editInfo = {title: "修改分类", addVisible: false, modal: true};
+/*const defaultProps = {
+  children: 'children',
+  label: 'label',
+}
+*/
+const defaultProps = {
+  children: "cmsCategories",
+  label: "name",
 };
+
+
+const form = {parentId: "parent", moduleId: 'backend'};
+const editForm = {};
+//methods: {
+let categoryList = ref([]);
+const loadCategoryList = () => {
+  let data = {module: 'backend'};
+  listCategory(data).then((res) => {
+    console.log(res.data);
+    categoryList = res.data;
+    console.log("category", categoryList);
+  });
+};
+loadCategoryList();
+const openAdd = (parent, node) => {
+  addInfo.addVisible = true;
+  form.moduleId = 'backend';
+  if (node) {
+    addInfo.title = "添加 " + node.data.name + " 子类别"
+    form.parentId = node.data.categoryId;
+    console.log(parent, node.data);
+  } else {
+    addInfo.title = "添加类别"
+    form.parentId = "parent";
+  }
+};
+const openEdit = (node) => {
+  console.log("openEdit: ", node.data);
+  editInfo.addVisible = true;
+  editForm = node.data;
+};
+const remove = (node, data) => {
+  console.log("node", node);
+  delCategory({categoryId: node.data.categoryId}).then((res) => {
+    console.log(res)
+    if (res.rcode == 0) {
+      ElMessage({
+        message: res.message || '删除成功',
+        type: 'success',
+      });
+      loadCategoryList();
+    } else {
+      ElMessage.error(res.message);
+    }
+  });
+};
+const refreshData = () => {
+  loadCategoryList();
+};
+//},
+//};
 </script>
 <style>
 .custom-tree-node {
