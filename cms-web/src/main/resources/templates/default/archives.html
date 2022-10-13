@@ -1,118 +1,113 @@
 <!doctype html>
 <html lang="zh-CN" xmlns:th="http://www.w3.org/1999/html">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" th:content="${cmsContent.title} +', 知识的力量'" />
-<meta name="description" th:content="${cmsContent.contentDesc  }">
-<meta name="author" content="XyMiao">
-<meta name="generator" content="MzCMS">
-<title><th:block th:text="${cmsContent.title}"></th:block> |
-	知识就是力量</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/vs2015.min.css">
-<!-- Custom styles for this template -->
-<link rel="stylesheet" href="/res/css/starter-template.css" />
-<style>
-.bi {
-	vertical-align: -.125em;
-	fill: currentColor;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" th:content="${cmsContent.title} +', 知识的力量'"/>
+    <meta name="description" th:content="${cmsContent.contentDesc  }">
+    <meta name="author" content="XyMiao">
+    <meta name="generator" content="MzCMS">
+    <title><th:block th:text="${cmsContent.title}"></th:block> |
+        知识就是力量</title>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.5.1/styles/vs2015.min.css">
 
-a:hover {
-	color: #16a085;
-}
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/res/css/starter-template.css"/>
+    <style>
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
 
-a {
-	color: #666;
-	text-decoration: none;
-	transition: color .2s;
-}
+        a:hover {
+            color: #16a085;
+        }
 
-img {
-	max-width: 100%;
-	height: auto;
-	overflow: hidden;
-}
+        a {
+            color: #666;
+            text-decoration: none;
+            transition: color .2s;
+        }
 
-pre, code {
-	font-family: Monaco;
-	font-size: 14px;
-	line-height: 24px;
-}
-</style>
+        img {
+            max-width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+
+        pre, code {
+            font-family: Monaco;
+            font-size: 14px;
+            line-height: 24px;
+        }
+    </style>
 </head>
 <body class="bg-light">
-	<th:block th:insert="~{default/template/header :: menu}"></th:block>
+<th:block th:insert="~{default/template/header :: menu}"></th:block>
 
-	<div class="container bg-white">
-		<div class="row g-2">
-			<div class="col-md-8">
-				<article class="blog-post">
-					<h2 class="blog-post-title mt-3 mb-3 fs-3">
-						<th:block th:text="${cmsContent.title}"></th:block>
-					</h2>
-					<p class="blog-post-meta text-muted mb-3">
+<div class="container bg-white">
+    <div class="row g-2">
+        <div class="col-md-8">
+            <article class="blog-post">
+                <h2 class="blog-post-title mt-3 mb-3 fs-3">
+                    <th:block th:text="${cmsContent.title}"></th:block>
+                </h2>
+                <p class="blog-post-meta text-muted mb-3">
 						<span><th:block
-								th:text="${#temporals.format(cmsContent.publishDate, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
+                                th:text="${#temporals.format(cmsContent.publishDate, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
 						</span> •
-						<th:block th:text="${categoryName}"></th:block>
-						•
-						<th:block th:text="${cmsContent.commentNum}"></th:block>
-						条评论 • <a href="#">xymiao</a> •
-						<th:block th:text="${cmsContent.viewNum}"></th:block>
-						次阅读
-					</p>
-					<div class="entry-content" itemprop="articleBody">
-						<th:block [( th:utext="${cmsContent.content}" )]></th:block>
-					</div>
-				</article>
-				<div class="alert alert-info" role="alert">
-					原创文章转载请注明：转载自：<a href="" class="alert-link"> <th:block
-							th:text="${cmsContent.title}"></th:block>
-					</a>
-				</div>
+                    <th:block th:text="${categoryName}"></th:block>
+                    •
+                    <th:block th:text="${cmsContent.commentNum}"></th:block>
+                    条评论 • <a href="#">xymiao</a> •
+                    <th:block th:text="${cmsContent.viewNum}"></th:block>
+                    次阅读
+                </p>
+                <div class="entry-content" itemprop="articleBody">
+                    <th:block [( th:utext="${cmsContent.content}" )]></th:block>
+                </div>
+            </article>
+            <div class="alert alert-info" role="alert">
+                原创文章转载请注明：转载自：<a href="" class="alert-link">
+                <th:block
+                        th:text="${cmsContent.title}"></th:block>
+            </a>
+            </div>
 
-				<nav class="blog-pagination d-flex justify-content-end"
-					aria-label="Pagination">
-					<a class="btn btn-light" href="javascript:void(0);">上一篇</a> <span
-						class="align-middle"> &nbsp;•&nbsp; </span> <a
-						class="btn btn-light " href="javascript:void(0);">下一篇</a>
-				</nav>
+            <nav class="blog-pagination d-flex justify-content-end"
+                 aria-label="Pagination">
+                <a class="btn btn-light" href="javascript:void(0);">上一篇</a> <span
+                    class="align-middle"> &nbsp;•&nbsp; </span> <a
+                    class="btn btn-light " href="javascript:void(0);">下一篇</a>
+            </nav>
+        </div>
 
-			</div>
+        <div class="col-md-4">
+            <div class="position-sticky" style="top: 2rem;">
+                <div class="p-4 mb-3  rounded">
+                    <h4 class="">苗子说全栈</h4>
+                    <p class="mb-0">
+                        技术站–从未停止的技术路<br/> 坚持, 完成自己的梦想. 只要能坚持, 一定会成功! 技术路！
+                    </p>
+                </div>
 
-			<div class="col-md-4">
-				<div class="position-sticky" style="top: 2rem;">
-					<div class="p-4 mb-3  rounded">
-						<h4 class="">苗子说全栈</h4>
-						<p class="mb-0">
-							技术站–从未停止的技术路<br /> 坚持, 完成自己的梦想. 只要能坚持, 一定会成功! 技术路！
-						</p>
-					</div>
+                <th:block th:insert="~{default/template/rightmenu :: category}"></th:block>
+                <th:block th:insert="~{default/template/rightmenu :: date}"></th:block>
+                <th:block th:insert="~{default/template/rightmenu :: other}"></th:block>
+            </div>
+        </div>
+    </div>
+</div>
 
-					<th:block th:insert="~{default/template/rightmenu :: category}"></th:block>
-					<th:block th:insert="~{default/template/rightmenu :: date}"></th:block>
-					<th:block th:insert="~{default/template/rightmenu :: other}"></th:block>
-				</div>
-			</div>
+<div class="container bg-white">
+    <th:block th:insert="~{default/template/footer :: footer}"></th:block>
+</div>
 
-		</div>
-	</div>
-
-
-	<div class="container bg-white">
-		<th:block th:insert="~{default/template/footer :: footer}"></th:block>
-	</div>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
-	<script
-		src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>
-		hljs.initHighlightingOnLoad();
-	</script>
+<script src="https://unpkg.com/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/@highlightjs/cdn-assets@11.5.1/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
 </body>
 </html>
