@@ -23,7 +23,9 @@ public class CmsContentServiceImpl implements CmsContentService {
 
 	@Override
 	public List<CmsContent> queryContentByCategory(String categoryId) {
-		return cmsContentMapper.selectList(Wrappers.<CmsContent>lambdaQuery().orderByDesc(CmsContent::getPublishDate));
+		String sql  = " select content_id from cms_category_content where category_id = '" + categoryId + "'";
+		return cmsContentMapper.selectList(Wrappers.<CmsContent>lambdaQuery()
+				.inSql(CmsContent::getContentId, sql).orderByDesc(CmsContent::getPublishDate));
 	}
 
 	@Override

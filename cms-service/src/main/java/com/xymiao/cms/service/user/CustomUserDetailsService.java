@@ -19,7 +19,6 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
         SysUser sysUser = sysUserService.getUserByLoginId(loginId);
         if (sysUser == null) {
-
             throw new UsernameNotFoundException("username " + loginId + " is not found");
         }
         return new CustomUserDetails(sysUser);

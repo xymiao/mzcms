@@ -9,7 +9,7 @@ class CmsAdminApplicationTests {
 
     @Test
     void contextLoads() {
-        System.out.println(new BCryptPasswordEncoder().encode("user"));
+        System.out.println(new BCryptPasswordEncoder().encode("admin"));
     }
 
 }

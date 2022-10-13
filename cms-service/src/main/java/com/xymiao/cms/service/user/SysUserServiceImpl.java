@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service("sysUserServiceImpl")
 public class SysUserServiceImpl implements SysUserService {
+
     private SysUserMapper sysUserMapper;
     private final static String REDIS_USER_ID = "REDIS_USER_ID_";
 
