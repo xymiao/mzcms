@@ -2,11 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.xymiao.cms</groupId>
+   <!-- <groupId>com.xymiao.cms</groupId> 如果和父类一致， 可以不用写这个， 否则 ide 会有一个警告。-->
     <artifactId>cms-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cms-common</name>
     <description>cms-common</description>
+    <parent>
+        <groupId>com.xymiao.cms</groupId>
+        <artifactId>mzcms</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -14,7 +19,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
         </dependency>
     </dependencies>
 
