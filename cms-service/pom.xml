@@ -3,12 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>com.xymiao.cms</groupId>
+        <artifactId>mzcms</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.xymiao.cms</groupId>
+    <!--    <groupId>com.xymiao.cms</groupId>-->
     <artifactId>cms-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -27,23 +26,22 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-        	<groupId>org.springframework.boot</groupId>
-        	<artifactId>spring-boot-starter-data-redis</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
-        	<groupId>org.apache.commons</groupId>
-        	<artifactId>commons-pool2</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>3.18.1</version>
         </dependency>
         <dependency>
             <groupId>com.xymiao.cms</groupId>
             <artifactId>cms-mapper</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -54,11 +52,10 @@
             <optional>true</optional>
         </dependency>
 
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.14.3</version>
-		</dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -72,11 +69,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-
-        </plugins>
-    </build>
 
 </project>
