@@ -9,9 +9,23 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <mybatis-plus-boot.version>3.5.1</mybatis-plus-boot.version>
+        <mybatis-spring-boot-starter.version>2.2.2</mybatis-spring-boot-starter.version>
+        <druid-spring-boot-starter.version>1.2.9</druid-spring-boot-starter.version>
+        <lombok.version>1.18.20</lombok.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <jsoup.version>1.14.3</jsoup.version>
+        <java-jwt.version>3.19.1</java-jwt.version>
     </properties>
 
     <modules>
@@ -20,5 +34,71 @@
         <module>cms-mapper</module>
         <module>cms-service</module>
     </modules>
+    <!-- 父类依赖管理， 所有的依赖版本放到该管理中 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 数据库相关的依赖 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java-jwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <!-- 模块的引用 -->
+            <dependency>
+                <groupId>com.xymiao.cms</groupId>
+                <artifactId>cms-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xymiao.cms</groupId>
+                <artifactId>cms-pojo</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xymiao.cms</groupId>
+                <artifactId>cms-mapper</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xymiao.cms</groupId>
+                <artifactId>cms-service</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
