@@ -22,7 +22,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     private final static Logger log = LoggerFactory.getLogger(JWTAuthorizationFilter.class);
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         String token = getTokenFromRequestHeader(request);
         Authentication verifyResult = verefyToken(token, JWTUtil.DEFAULT_SECRET);
         if (verifyResult == null) {

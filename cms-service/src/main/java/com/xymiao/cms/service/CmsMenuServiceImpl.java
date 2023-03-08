@@ -1,11 +1,10 @@
 package com.xymiao.cms.service;
 
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xymiao.cms.mapper.CmsMenuMapper;
 import com.xymiao.cms.pojo.CmsMenu;
-
+import com.xymiao.common.utils.IdsUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,6 @@ public class CmsMenuServiceImpl implements CmsMenuService {
     private final static Logger logger = LoggerFactory.getLogger(CmsMenuServiceImpl.class);
     private CmsMenuMapper cmsMenuMapper;
 
-    @Autowired
     public CmsMenuServiceImpl(CmsMenuMapper cmsMenuMapper) {
         this.cmsMenuMapper = cmsMenuMapper;
     }
@@ -31,7 +29,7 @@ public class CmsMenuServiceImpl implements CmsMenuService {
         if (Objects.isNull(cmsMenu)) {
             return null;
         }
-        cmsMenu.setMenuId(IdWorker.get32UUID());
+        cmsMenu.setMenuId(IdsUtils.getId());
         cmsMenu.setDelFlag("0");
         cmsMenu.setCreated(LocalDateTime.now());
         cmsMenu.setLastDate(LocalDateTime.now());

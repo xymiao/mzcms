@@ -7,6 +7,7 @@ import java.util.Objects;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.xymiao.common.exception.BusinessException;
+import com.xymiao.common.utils.IdsUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class CmsCategoryServiceImpl implements CmsCategoryService {
 			return null;
 		}
 		LocalDateTime currDate = 	LocalDateTime.now();
-		cmsCategory.setCategoryId(IdWorker.get32UUID());
+		cmsCategory.setCategoryId(IdsUtils.getId());
 		cmsCategory.setCreated(currDate);
 		cmsCategory.setLastDate(currDate);
 		int rows = cmsCategoryMapper.insert(cmsCategory);

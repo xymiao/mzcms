@@ -28,7 +28,6 @@ public class ArticleController extends BaseController {
     private final CmsContentService cmsContentService;
     private final CmsCategoryService cmsCategoryService;
 
-
     public ArticleController(CmsMenuService cmsMenuService, CmsContentService cmsContentService, CmsCategoryService cmsCategoryService) {
         this.cmsMenuService = cmsMenuService;
         this.cmsContentService = cmsContentService;

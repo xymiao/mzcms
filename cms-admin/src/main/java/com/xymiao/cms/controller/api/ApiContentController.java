@@ -17,11 +17,12 @@ import java.util.List;
 public class ApiContentController {
     private final static Logger logger = LoggerFactory.getLogger(ApiContentController.class);
     private  CmsContentService cmsContentService;
-    @Autowired
-    private  UserUtils userUtils;
-    @Autowired
-    public ApiContentController(CmsContentService cmsContentService) {
+
+    private final   UserUtils userUtils;
+
+    public ApiContentController(CmsContentService cmsContentService, UserUtils userUtils) {
         this.cmsContentService = cmsContentService;
+        this.userUtils = userUtils;
     }
 
     @PostMapping("list/{categoryId}")

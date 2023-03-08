@@ -17,7 +17,6 @@ import java.io.IOException;
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
     private Logger logger = LoggerFactory.getLogger(CustomAuthenticationSuccessHandler.class);
 
-
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         logger.info("没有登录， 请登录");

@@ -34,7 +34,7 @@ public class ApiSiteSettingController {
 
     /**
      * 编辑站点信息
-     * @param cmsMenu
+     * @param sysSiteSetting
      * @return
      */
     @PostMapping(value="edit")
