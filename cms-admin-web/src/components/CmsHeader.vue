@@ -17,18 +17,20 @@
 
 </template>
 
-<script  lang="ts">
-export default {
-  methods:{
-    exitSystem(){
-      this.$store.commit("userExit");
-      this.$router.push("/login");
-    },
-    handleSelect(key, keyPath){
-      this.$router.push(key);
-      console.log(keyPath);
-    }
-  }
+<script  lang="ts" setup>
+import {useStore} from 'vuex';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+const store = useStore();
+
+const exitSystem = ()=>{
+  store.commit("userExit");
+  router.push("/login");
+}
+
+const handleSelect = (key: string, keyPath: string)=>{
+  router.push(key);
+  console.log(keyPath);
 }
 </script>
 

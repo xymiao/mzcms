@@ -43,8 +43,8 @@
 </template>
 
 <script lang="ts">
-import { putContent } from "../api/api_content";
-import WangEditorEdit from "./WangEditorEdit.vue";
+import { putContent } from "../../api/api_content";
+import WangEditorEdit from "../WangEditorEdit.vue";
 import { ref, reactive, toRefs, provide } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from 'element-plus'

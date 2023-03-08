@@ -1,11 +1,9 @@
 <template>
-  <div>MzCMS前端分离的项目搭建初始化</div>
+  <el-empty image="welcome.png" description="MzCMS前端分离的项目管理后台"/>
 </template>
 
-<script>
-export default {
+<script lang="ts" setup>
 
-}
 </script>
 
 <style>

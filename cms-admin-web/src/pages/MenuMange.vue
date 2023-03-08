@@ -22,16 +22,16 @@
       <el-table-column prop="menuInfo" label="菜单描述"></el-table-column>
       <el-table-column fixed="right" label="操作" width="240">
         <template #default="scope">
-          <el-button size="mini" @click="handleAddSubMenu(scope)">新增
+          <el-button size="small" @click="handleAddSubMenu(scope)">新增
           </el-button>
-          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑
+          <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑
           </el-button>
           <el-popconfirm title="确定要删除该菜单吗?"
                          confirm-button-text="确认"
                          cancel-button-text="取消"
                          @confirm="delMenu(scope.$index, scope.row)">
             <template #reference>
-              <el-button size="mini"
+              <el-button size="small"
                          type="danger">删除
               </el-button>
             </template>

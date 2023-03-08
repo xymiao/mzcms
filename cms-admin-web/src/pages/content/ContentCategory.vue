@@ -3,20 +3,17 @@
     <template #header>
       <div class="card-header">
         <span>内容分类管理</span>
-        <el-button class="button" type="text" @click="openAdd('parent')"
+        <el-button class="button" type="default" @click="openAdd('parent')"
         >新增类别
         </el-button>
       </div>
     </template>
-{{categoryList}}
-    <el-tree :data="categoryList" :props="defaultProps" @node-click="handleNodeClick"/>
-
     <el-tree
         :data="categoryList"
-        node-key="categoryId"
+        :expand-on-click-node="false"
         :props="defaultProps"
-        default-expand-all
-        :expand-on-click-node="false">
+
+        node-key="categoryId">
       <template #default="{ node, data }">
         <span class="custom-tree-node">
           <span>{{ node.data.name }} - {{ node.data.url }}</span>
@@ -38,7 +35,7 @@
               <Plus/>
             </el-icon>
             &nbsp;&nbsp;
-             <el-popconfirm title="确认要删除该类别吗?" confirmButtonText="删除" cancelButtonText="取消"
+             <el-popconfirm cancelButtonText="取消" confirmButtonText="删除" title="确认要删除该类别吗?"
                             @confirm="remove(node, data)">
               <template #reference>
                 <el-icon>
@@ -52,12 +49,12 @@
     </el-tree>
   </el-card>
   <category-add :add-info="addInfo" :form="form" @refresh="refreshData"></category-add>
-  <category-edit :edit-info="editInfo" :edit-form="editForm" @refresh="refreshData"></category-edit>
+  <category-edit :edit-form="editForm" :edit-info="editInfo" @refresh="refreshData"></category-edit>
 </template>
 
 <script lang="ts" setup>
 import {ref} from 'vue'
-import {delCategory, listCategory} from "../api/api_category";
+import {delCategory, listCategory} from "../../api/api_category";
 import CategoryAdd from "./CategoryAdd.vue";
 import CategoryEdit from "./CategoryEdit.vue";
 import {CircleClose, Delete, Edit, Open, Plus} from "@element-plus/icons";
@@ -72,90 +69,11 @@ const handleNodeClick = (data: Tree) => {
   console.log(data)
 }
 
-const data: Tree[] = [
-  {
-    label: 'Level one 1',
-    children: [
-      {
-        label: 'Level two 1-1',
-        children: [
-          {
-            label: 'Level three 1-1-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Level one 2',
-    children: [
-      {
-        label: 'Level two 2-1',
-        children: [
-          {
-            label: 'Level three 2-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 2-2',
-        children: [
-          {
-            label: 'Level three 2-2-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: 'Level one 3',
-    children: [
-      {
-        label: 'Level two 3-1',
-        children: [
-          {
-            label: 'Level three 3-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 3-2',
-        children: [
-          {
-            label: 'Level three 3-2-1',
-          },
-        ],
-      },
-    ],
-  },
-]
-
 
 let id = 1000;
-//export default {
-/*
-data()
-{
-  return {
-    addInfo: {title: "新增分类", addVisible: false, modal: true},
-    editInfo: {title: "修改分类", addVisible: false, modal: true},
-    categoryList: [],
-    defaultProps: {
-      children: "cmsCategories",
-      label: "name",
-    },
-    form: {parentId: "parent", moduleId: 'backend'},
-    editForm: {},
-  };
-}
-*/
-const addInfo = {title: "新增分类", addVisible: false, modal: true};
-const editInfo = {title: "修改分类", addVisible: false, modal: true};
-/*const defaultProps = {
-  children: 'children',
-  label: 'label',
-}
-*/
+const addInfo = ref({title: "新增分类", addVisible: false, modal: true});
+const editInfo = ref({title: "修改分类", addVisible: false, modal: true});
+
 const defaultProps = {
   children: "cmsCategories",
   label: "name",
@@ -163,37 +81,50 @@ const defaultProps = {
 
 
 const form = {parentId: "parent", moduleId: 'backend'};
-const editForm = {};
-//methods: {
+let editForm = {
+  categoryId: "",
+  name: "",
+  moduleId: "",
+  parentId: "",
+  url: "",
+  sort: 0,
+
+};
+
 let categoryList = ref([]);
 const loadCategoryList = () => {
   let data = {module: 'backend'};
   listCategory(data).then((res) => {
-    console.log(res.data);
-    categoryList = res.data;
-    console.log("category", categoryList);
+    //console.log(res.data);
+    categoryList.value = res.data;
+    //console.log("category", categoryList.value);
   });
 };
 loadCategoryList();
 const openAdd = (parent, node) => {
-  addInfo.addVisible = true;
+  addInfo.value.addVisible = true;
   form.moduleId = 'backend';
   if (node) {
-    addInfo.title = "添加 " + node.data.name + " 子类别"
+    addInfo.value.title = "添加 " + node.data.name + " 子类别"
     form.parentId = node.data.categoryId;
-    console.log(parent, node.data);
+    //console.log(parent, node.data);
   } else {
-    addInfo.title = "添加类别"
+    addInfo.value.title = "添加类别"
     form.parentId = "parent";
   }
 };
 const openEdit = (node) => {
   console.log("openEdit: ", node.data);
-  editInfo.addVisible = true;
-  editForm = node.data;
+  editInfo.value.addVisible = true;
+  editForm.categoryId = node.data.categoryId;
+  editForm.name = node.data.name;
+  editForm.moduleId = node.data.moduleId;
+  editForm.parentId = node.data.parentId;
+  editForm.url = node.data.url;
+  console.log(editForm.name)
 };
 const remove = (node, data) => {
-  console.log("node", node);
+  //console.log("node", node);
   delCategory({categoryId: node.data.categoryId}).then((res) => {
     console.log(res)
     if (res.rcode == 0) {
@@ -210,8 +141,7 @@ const remove = (node, data) => {
 const refreshData = () => {
   loadCategoryList();
 };
-//},
-//};
+
 </script>
 <style>
 .custom-tree-node {

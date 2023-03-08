@@ -3,7 +3,7 @@
     v-model="addInfo.addVisible"
     :modal="addInfo.modal"
     :title="addInfo.title"
-    width="30%"
+    width="480px"
   >
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item v-if="form.parentId != 'parent'" label="父类属性">
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { putCategory } from "../api/api_category";
+import { putCategory } from "../../api/api_category";
 import { ElMessage } from "element-plus";
 export default {
   data() {

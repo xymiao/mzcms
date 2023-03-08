@@ -6,10 +6,10 @@ const Home = () => import('../pages/Home.vue')
 const About = () => import('../pages/About.vue')
 const NotFound = () => import( '../pages/NotFound.vue')
 const Login = () => import('../pages/Login.vue')
-const Content = () => import('../pages/Content.vue')
-const ContentAdd = () => import('../pages/ContentAdd.vue')
-const ContentEdit = () => import('../pages/ContentEdit.vue')
-const ContentCategory = () => import('../pages/ContentCategory.vue')
+const Content = () => import('../pages/content/Content.vue')
+const ContentAdd = () => import('../pages/content/ContentAdd.vue')
+const ContentEdit = () => import('../pages/content/ContentEdit.vue')
+const ContentCategory = () => import('../pages/content/ContentCategory.vue')
 const MenuMange = () => import('../pages/MenuMange.vue')
 const SiteSetting = () => import('../pages/SiteSetting.vue')
 
@@ -21,6 +21,8 @@ const LogIndex = () => import('../pages/LogIndex.vue')
 const UserList = () => import('../pages/user/UserList.vue')
 
 const PageIndex = () => import('../pages/PageIndex.vue')
+
+const DesignIndex = () => import('../pages/design/DesignIndex.vue')
 
 const routes = [
     {path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound},
@@ -78,6 +80,10 @@ const routes = [
         ]
     },
     {path: '/about', component: About},
+    {
+        path: '/design_ui',
+        component: DesignIndex, name: 'design_ui',
+    },
     {path: '/login', name: 'Login', component: Login, hidden: true},
 ]
 

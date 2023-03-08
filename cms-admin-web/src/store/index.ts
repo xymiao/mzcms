@@ -1,8 +1,8 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 
 // 创建一个新的 store 实例
-export  const store = createStore({
-    state () {
+export const store = createStore({
+    state() {
         return {
             userSession: '1',
             userToken: '',
@@ -14,38 +14,38 @@ export  const store = createStore({
         isLogin: (state: any) => {
             return state.userSession;
         },
-        isCollapse: (state) =>{
+        isCollapse: (state) => {
             return state.isCollapse;
         },
-        userToken: (state) =>{
+        userToken: (state) => {
             return state.userToken;
         },
-        getLeftNavBarList: (state) =>{
+        getLeftNavBarList: (state) => {
             return state.leftNavbarList;
         }
     },
     mutations: {
-        useMenuCollapse(state, value){
+        useMenuCollapse(state, value) {
             state.isCollapse = value;
         },
-        userLogin(state, token){
+        userLogin(state, token) {
             state.userSession = '2';
             console.log("设置token", token);
             state.userToken = token;
         },
-        userExit(state){
+        userExit(state) {
             state.userSession = "1";
             state.userToken = "";
             state.leftNavbarList = [];
         },
-        userClean(state){
+        userClean(state) {
             state.userSession = "1";
             state.userToken = "";
         },
-        setLeftNavBarList(state, info){
+        setLeftNavBarList(state, info) {
             state.leftNavbarList = info;
         }
     }
 })
-export  default { store }
+export default {store}
 

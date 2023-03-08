@@ -6,8 +6,8 @@
     width="500px"
   >
     <el-form ref="editForm" :model="editForm" label-width="80px">
-      <el-form-item v-if="editForm.parentId != 'parent'" label="父类属性">
-        {{ parentName }}
+      <el-form-item v-if="editForm.parentId !== 'parent'" label="父类属性">
+        {{ parentName }} {{editForm}}
       </el-form-item>
       <el-form-item label="分类名称">
         <el-input
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { editCategory } from "../api/api_category";
+import { editCategory } from "../../api/api_category";
 import { ElMessage } from "element-plus";
 export default {
   data() {
