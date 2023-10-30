@@ -12,17 +12,19 @@ spring:
     username: mzcms
     password: mzcms
     driver-class-name: com.mysql.cj.jdbc.Driver
-  redis:
-    database: 1
-    host: 127.0.0.1
-    port: 6379
-    timeout: 3000
-    lettuce:
-      pool:
-        max-active: 8
-        max-wait: -1ms
-        max-idle: 8
-        min-idle: 0
+  data:
+    redis:
+      database: 1
+      host: 127.0.0.1
+      port: 6379
+      password: admin.com
+      timeout: 3000
+      lettuce:
+        pool:
+          max-active: 8
+          max-wait: -1ms
+          max-idle: 8
+          min-idle: 0
 jwt:
   private.key: classpath:app.key
   public.key: classpath:app.pub

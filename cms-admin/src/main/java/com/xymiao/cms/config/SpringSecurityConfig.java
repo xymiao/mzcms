@@ -3,22 +3,26 @@ package com.xymiao.cms.config;
 import com.xymiao.cms.service.user.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
 @EnableWebSecurity
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+@Configuration
+public class SpringSecurityConfig {
     private DataSource dataSource;
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
@@ -38,24 +42,27 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new CustomUserDetailsService();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(customUserDetailsService());
-    }
-
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .formLogin().successHandler(customAuthenticationSuccessHandler)
-                .failureHandler(customAuthenticationFailureHandler)
-                .permitAll()
-                .and()
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((auth) -> {
+                    auth.anyRequest().authenticated();
+                })
+                .csrf(csrf->{
+                    csrf.disable();
+                })
+                .formLogin(form -> {
+                    form.successHandler(customAuthenticationSuccessHandler);
+                    form.failureHandler(customAuthenticationFailureHandler);
+                })
                 .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)  //取消session功能
-                .and()
-                .exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint);
-        super.configure(http);
+                .sessionManagement(sm -> {
+                    sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS);  //取消session功能;
+                })
+                .exceptionHandling(eh -> {
+                    eh.authenticationEntryPoint(customAuthenticationEntryPoint);
+                });
+
+        return http.build();
     }
 
     @Bean

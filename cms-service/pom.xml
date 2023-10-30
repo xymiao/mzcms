@@ -7,7 +7,6 @@
         <artifactId>mzcms</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <!--    <groupId>com.xymiao.cms</groupId>-->
     <artifactId>cms-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>

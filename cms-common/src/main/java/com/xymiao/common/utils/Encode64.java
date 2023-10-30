@@ -29,7 +29,6 @@ public class Encode64 {
 	 * 把10进制的数字转换成64进制
 	 * 
 	 * @param number
-	 * @param shift
 	 * @return
 	 */
 	public static String CompressNumber(long number) {

@@ -8,7 +8,7 @@
         <result property="parentId" column="parent_id"/>
         <result property="moduleId" column="module_id"/>
         <result property="created" column="created"/>
-        <result property="updated" column="updated"/>
+        <result property="lastDate" column="last_date"/>
         <result property="userId" column="user_id"/>
 		<result property="sort" column="sort"/>
  		<result property="url" column="url"/>
