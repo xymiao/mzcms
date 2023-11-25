@@ -2,7 +2,7 @@ import axios from "axios";
 import {ElLoading, ElMessage} from "element-plus";
 import { store } from '../store/index'
 
-let instance = axios.create({
+const instance = axios.create({
     baseURL: '/api',
     timeout: 10000, //设置超时
     headers: {
@@ -16,7 +16,7 @@ let loading;
 let requestCount = 0;
 const showLoading = () => {
     if (requestCount === 0 && !loading) {
-        loading = ElLoading.service({text: 'Loading', background: 'rgba(0, 0, 0, 0.7)', spinner: 'el-icon-loading'});
+        loading = ElLoading.service({text: '加载中', background: 'rgba(0, 0, 0, 0.7)', spinner: 'el-icon-loading'});
     }
     requestCount++;
 };
@@ -27,9 +27,14 @@ const hideLoading = () => {
         loading.close();
     }
 }
+instance.interceptors.request.use(config =>{
+    showLoading();
+    return config;
+});
 
 instance.interceptors.response.use(res => {
     // 成功响应的拦截
+    hideLoading();
     return Promise.resolve(res.data)
 }, err =>{
     // 失败响应的拦截

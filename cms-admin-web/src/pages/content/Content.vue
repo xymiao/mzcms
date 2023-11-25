@@ -22,7 +22,7 @@
             :expand-on-click-node="false">
           <template #default="{ node, data }">
               <span class="custom-tree-node">
-                <span >{{ node.data.name }}</span>
+                <span>{{ node.data.name }}</span>
               </span>
           </template>
         </el-tree>
@@ -32,7 +32,9 @@
           <!--     <el-table-column prop="contentId" label="ID" width="80"></el-table-column>-->
           <el-table-column prop="title" label="内容"></el-table-column>
           <el-table-column prop="contentState" label="状态" width="120">
-            <el-link>访问</el-link>
+            <template #default="scope">
+              <el-link :href="'http://127.0.0.1:8090/archives/'+ scope.row.contentId" target="_blank">访问</el-link>
+            </template>
           </el-table-column>
           <el-table-column prop="address" label="操作" width="120">
             <template #default="scope">
@@ -49,7 +51,7 @@
               v-model:currentPage="currentPage1"
               :page-size="10"
               layout="total, prev, pager, next"
-              :total="categoryList.length"
+              :total="contentList.length"
           >
           </el-pagination>
         </div>
@@ -101,6 +103,7 @@ const handleSizeChange = () => {
 const handleCurrentChange = () => {
 
 }
+
 interface Tree {
   label: string
   children?: Tree[]

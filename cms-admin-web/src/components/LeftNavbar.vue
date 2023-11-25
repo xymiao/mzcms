@@ -51,7 +51,7 @@ import {useRouter} from 'vue-router';
 import {showMenu } from "../api/api_menu";
 import {LeftMenuStore} from '../store/left_menu';
 
-import {Expand, Fold, Menu, Document, Tickets, User, Setting} from "@element-plus/icons";
+import {Expand, Fold, Menu, Document, Tickets, User, Setting} from "@element-plus/icons-vue";
 
 const store = useStore();
 const router = useRouter();

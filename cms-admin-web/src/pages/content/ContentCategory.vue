@@ -57,7 +57,7 @@ import {ref} from 'vue'
 import {delCategory, listCategory} from "../../api/api_category";
 import CategoryAdd from "./CategoryAdd.vue";
 import CategoryEdit from "./CategoryEdit.vue";
-import {CircleClose, Delete, Edit, Open, Plus} from "@element-plus/icons";
+import {CircleClose, Delete, Edit, Open, Plus} from "@element-plus/icons-vue";
 import {ElMessage} from 'element-plus'
 
 interface Tree {

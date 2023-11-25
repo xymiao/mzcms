@@ -46,7 +46,6 @@
 </template>
 
 <script lang="ts">
-import { listCategory } from "../../api/api_category";
 import { getContent, editContentPost } from "../../api/api_content";
 import WangEditorEdit from "../WangEditorEdit.vue";
 import { ref, onMounted, reactive, toRefs, provide, computed } from "vue";
@@ -93,6 +92,7 @@ export default {
     let editContentOld = ref(""); // 原始数据
     let editContent = ref("");
     const updateEditContent = (text) => {
+      console.log(text)
       editContent.value = text;
     };
 
