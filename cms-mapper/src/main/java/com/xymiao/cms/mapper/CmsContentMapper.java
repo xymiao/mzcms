@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CmsContentMapper extends BaseMapper<CmsContent> {
 
+    void updateViewCount(String id);
 }

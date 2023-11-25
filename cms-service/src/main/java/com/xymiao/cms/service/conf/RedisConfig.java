@@ -36,10 +36,10 @@ public class RedisConfig {
 	 * 设置jackson的序列化方式
 	 */
 	private Jackson2JsonRedisSerializer<Object> getJsonRedisSerializer() {
-		Jackson2JsonRedisSerializer<Object> redisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
+
 		ObjectMapper om = new ObjectMapper();
 		om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-		redisSerializer.setObjectMapper(om);
+		Jackson2JsonRedisSerializer<Object> redisSerializer = new Jackson2JsonRedisSerializer<>(om, Object.class);
 		return redisSerializer;
 	}
 

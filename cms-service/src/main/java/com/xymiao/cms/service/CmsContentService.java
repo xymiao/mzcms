@@ -26,4 +26,10 @@ public interface CmsContentService {
 	CmsContent saveContent(CmsContent cmsContent);
 
 	int updateCotent(CmsContent cmsContent);
+
+    /**
+     * 增加浏览次数
+     * @param id 主键
+     */
+    void addViewCount(String id);
 }

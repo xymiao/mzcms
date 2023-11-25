@@ -56,6 +56,11 @@ public class CmsContentServiceImpl implements CmsContentService {
 		String t = Jsoup.parse(cmsContent.getContent()).text();
 		String c = t.substring(0, t.length() < 100 ? t.length() : 100);
 		cmsContent.setContentDesc( c );
+		cmsContent.setViewNum(0l);
+		cmsContent.setCommentNum(0l);
+		cmsContent.setCreated(currDate);
+		cmsContent.setCommentFlag("0");
+		cmsContent.setContentState("1");
 		int rows = cmsContentMapper.insert(cmsContent);
 		if(rows <=0){
 			throw new BusinessException("内容保存失败！");
@@ -67,4 +72,9 @@ public class CmsContentServiceImpl implements CmsContentService {
 	public int updateCotent(CmsContent cmsContent) {
 		return cmsContentMapper.updateById(cmsContent);
 	}
+
+    @Override
+    public void addViewCount(String id) {
+        cmsContentMapper.updateViewCount(id);
+    }
 }

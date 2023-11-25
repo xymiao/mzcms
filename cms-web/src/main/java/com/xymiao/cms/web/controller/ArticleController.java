@@ -40,6 +40,7 @@ public class ArticleController extends BaseController {
         List<CmsMenu> list = cmsMenuService.listMenuByFront("frontend");
         model.addAttribute("list", list);
         CmsContent cmsContent = cmsContentService.getContent(id);
+        logger.info("文章内容：{}", cmsContent);
         model.addAttribute("cmsContent", cmsContent);
         if(cmsContent != null){
             List<CmsCategory> categoryList = cmsCategoryService.listByContentId(cmsContent.getContentId());
@@ -47,6 +48,7 @@ public class ArticleController extends BaseController {
                 model.addAttribute("categoryName",categoryList.get(0).getName());
             }
         }
+        cmsContentService.addViewCount(id);
         return RETURN_THEME + "archives";
     }
 

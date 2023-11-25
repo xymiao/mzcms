@@ -9,12 +9,23 @@
     <meta name="generator" content="MzCMS">
     <title><th:block th:text="${cmsContent.title}"></th:block> |
         知识就是力量</title>
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.1.3/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="//unpkg.com/@highlightjs/cdn-assets@11.5.1/styles/vs2015.min.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/font-awesome@4.7.0/css/font-awesome.min.css"/>
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="/res/css/starter-template.css"/>
     <style>
+        body {
+            font-family: PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Segoe UI;
+        }
+
+        .entry-content {
+            line-height: 1.74;
+            font-size: 1em;
+            letter-spacing: normal;
+            color: #262626;
+        }
+
         .bi {
             vertical-align: -.125em;
             fill: currentColor;
@@ -46,33 +57,41 @@
 <body class="bg-light">
 <th:block th:insert="~{default/template/header :: menu}"></th:block>
 
-<div class="container bg-white">
+<div class="container bg-white ">
     <div class="row g-2">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <article class="blog-post">
                 <h2 class="blog-post-title mt-3 mb-3 fs-3">
                     <th:block th:text="${cmsContent.title}"></th:block>
                 </h2>
-                <p class="blog-post-meta text-muted mb-3">
-						<span><th:block
-                                th:text="${#temporals.format(cmsContent.publishDate, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
-						</span> •
-                    <th:block th:text="${categoryName}"></th:block>
-                    •
-                    <th:block th:text="${cmsContent.commentNum}"></th:block>
-                    条评论 • <a href="#">xymiao</a> •
-                    <th:block th:text="${cmsContent.viewNum}"></th:block>
-                    次阅读
-                </p>
                 <div class="entry-content" itemprop="articleBody">
                     <th:block [( th:utext="${cmsContent.content}" )]></th:block>
                 </div>
             </article>
+            <div>
+                <p class="blog-post-meta text-muted mb-3" style="margin-top: 25px; color: #999 !important;">
+						<span>
+                          <i class="fa fa-clock-o" aria-hidden="true"
+                             title="更新时间"></i>&nbsp;
+                            <th:block
+                                    th:text="${#temporals.format(cmsContent.publishDate, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
+						</span>
+                    <th:block th:if="${categoryName != null}">&nbsp;&nbsp;&nbsp;&nbsp;</th:block>
+                    <th:block th:text="${categoryName}"></th:block>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;
+                    <th:block th:text="${cmsContent.publishUser}"></th:block>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-eye" aria-hidden="true" title="阅读次数"></i>&nbsp;
+                    <th:block th:text="${cmsContent.viewNum}"></th:block>
+
+                </p>
+            </div>
             <div class="alert alert-info" role="alert">
-                原创文章转载请注明：转载自：<a href="" class="alert-link">
-                <th:block
-                        th:text="${cmsContent.title}"></th:block>
-            </a>
+                原创文章转载请注明：转载自：
+                <a href="" class="alert-link">
+                    <th:block th:text="${cmsContent.title}"></th:block>
+                </a>
             </div>
 
             <nav class="blog-pagination d-flex justify-content-end"
@@ -83,14 +102,12 @@
             </nav>
         </div>
 
-        <div class="col-md-4">
-            <div class="position-sticky" style="top: 2rem;">
-                <th:block th:insert="~{default/template/rightmenu :: category}"></th:block>
+        <div class="col-md-3">
+            <div class="position-sticky" style="top: 3rem; border-left: 1px solid #ccc;">
                 <div class="p-4 mb-3  rounded">
-                    <h4 class="">苗子说全栈</h4>
-                    <p class="mb-0">
-                        技术站–从未停止的技术路<br/> 坚持, 完成自己的梦想. 只要能坚持, 一定会成功! 技术路！
-                    </p>
+                    <h6 class="">大纲</h6>
+                    <div id="outline">
+                    </div>
                 </div>
                 <th:block th:insert="~{default/template/rightmenu :: date}"></th:block>
                 <th:block th:insert="~{default/template/rightmenu :: other}"></th:block>
@@ -103,10 +120,50 @@
     <th:block th:insert="~{default/template/footer :: footer}"></th:block>
 </div>
 
-<script src="https://unpkg.com/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/@highlightjs/cdn-assets@11.5.1/highlight.min.js"></script>
 <script>
-    hljs.initHighlightingOnLoad();
+    hljs.highlightAll();
+</script>
+<script type="text/javascript">
+    window.onload = function () {
+        var outlineItems = [];  // 用于存放大纲项的数组
+        var headers = document.querySelector('.entry-content').querySelectorAll('h1, h2, h3, h4, h5, h6');
+        var outline = document.getElementById('outline');
+        for (var i = 0; i < headers.length; i++) {
+            var header = headers[i];
+            header.id = 'header-' + i;  // 给每个标题添加一个唯一的ID
+
+            var item = document.createElement('a');  // 创建一个链接元素
+            item.textContent = header.textContent;
+            item.href = '#header-' + i;  // 链接的href属性值为对应标题的ID
+            item.style.display = 'block';  // 让每个链接元素都独占一行
+            item.style.fontSize = '12px';
+            item.style.marginLeft = ((header.tagName[1] - 1) * 10) + 'px';
+            outline.appendChild(item);
+            outlineItems.push(item);  // 将大纲项添加到数组中
+        }
+        // 滚动事件处理器
+        window.onscroll = function () {
+            var current = null;
+            for (var i = 0; i < headers.length; i++) {
+                var header = headers[i];
+                var rect = header.getBoundingClientRect();
+                if (rect.top >= 100 && rect.bottom <= window.innerHeight) {
+                    current = header;
+                }
+            }
+            if (current) {
+                // 移除所有大纲项的高亮样式
+                for (var i = 0; i < outlineItems.length; i++) {
+                    outlineItems[i].style.color = '#666';
+                }
+                // 给当前标题对应的大纲项添加高亮样式
+                var index = Array.prototype.indexOf.call(headers, current);
+                outlineItems[index].style.color = '#16a085';
+            }
+        };
+    }
 </script>
 </body>
 </html>

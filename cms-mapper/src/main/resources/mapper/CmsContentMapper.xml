@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xymiao.cms.mapper.CmsContentMapper">
+    <resultMap id="cmsContentResultMap" type="com.xymiao.cms.pojo.CmsContent">
+        <id property="contentId" column="content_id" />
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="viewNum" column="view_num"/>
+        <result property="commentNum" column="comment_num"/>
+        <result property="contentState" column="content_state"/>
+        <result property="commentFlag" column="comment_flag"/>
+        <result property="created" column="created"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="publishUser" column="publish_user"/>
+        <result property="updated" column="updated"/>
+        <result property="contentDesc" column="content_desc"/>
+        <result property="titleMini" column="title_mini"/>
+        <result property="contentType" column="content_type"/>
+        <result property="contentPwd" column="content_pwd"/>
+    </resultMap>
+    <update id="updateViewCount">
+        update cms_content set view_num = view_num + 1 where content_id = #{contentId, jdbcType=VARCHAR}
+    </update>
+
+</mapper>
