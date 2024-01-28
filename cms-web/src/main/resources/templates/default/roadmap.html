@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>路线图</title>
+
+</head>
+<body>
+<div id="container" style="width: 100%; height: 100%;"></div>
+<script src="https://cdn.jsdelivr.net/npm/@antv/x6/dist/index.js"></script>
+<script>
+    document.ready = function (){
+        const graph = new Graph({
+            container: document.getElementById('container'),
+            width: 800,
+            height: 600,
+            background: {
+                color: '#F2F7FA',
+            },
+        })
+    }
+</script>
+</body>
+</html>
