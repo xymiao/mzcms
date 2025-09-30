@@ -64,4 +64,42 @@ public class ApiContentController {
        return ResponseBodyUtils.createBySuccessCodeMessage(msg, rows);
    }
    
+   /**
+    * 保存内容及标签
+    */
+   @PostMapping(value="put-with-tags")
+   public ResponseBodyUtils<Object> saveContentWithTags(@RequestBody ContentWithTagsRequest request){
+       logger.info("新增内容及标签 {}", request);
+       request.getContent().setPublishUser(userUtils.getUserId());
+       CmsContent cc = cmsContentService.saveContentWithTags(request.getContent(), request.getTagIds());
+       return ResponseBodyUtils.createBySuccessCodeMessage("内容保存成功！", cc);
+   }
+   
+   /**
+    * 更新内容及标签
+    */
+   @PostMapping(value="edit-with-tags")
+   public ResponseBodyUtils<Object> updateContentWithTags(@RequestBody ContentWithTagsRequest request){
+       logger.info("更新内容及标签：{}", request);
+       int rows = cmsContentService.updateContentWithTags(request.getContent(), request.getTagIds());
+       String msg = rows > 0 ? "修改成功" : "修改失败";
+       return ResponseBodyUtils.createBySuccessCodeMessage(msg, rows);
+   }
+   
+   // 内部类用于接收带标签的内容请求
+   public static class ContentWithTagsRequest {
+       private CmsContent content;
+       private java.util.List<String> tagIds;
+       
+       public CmsContent getContent() { return content; }
+       public void setContent(CmsContent content) { this.content = content; }
+       public java.util.List<String> getTagIds() { return tagIds; }
+       public void setTagIds(java.util.List<String> tagIds) { this.tagIds = tagIds; }
+       
+       @Override
+       public String toString() {
+           return "ContentWithTagsRequest{content=" + content + ", tagIds=" + tagIds + '}';
+       }
+   }
+   
 }

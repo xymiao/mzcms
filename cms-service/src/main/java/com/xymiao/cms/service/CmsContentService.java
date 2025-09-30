@@ -32,4 +32,27 @@ public interface CmsContentService {
      * @param id 主键
      */
     void addViewCount(String id);
+    
+    /**
+     * 更新内容评论数
+     * @param contentId 内容ID
+     * @param commentNum 评论数
+     */
+    void updateCommentCount(String contentId, Long commentNum);
+    
+    /**
+     * 保存内容及其标签
+     * @param cmsContent 内容对象
+     * @param tagIds 标签ID列表
+     * @return 保存的内容
+     */
+    CmsContent saveContentWithTags(CmsContent cmsContent, java.util.List<String> tagIds);
+    
+    /**
+     * 更新内容及其标签
+     * @param cmsContent 内容对象
+     * @param tagIds 标签ID列表
+     * @return 更新结果
+     */
+    int updateContentWithTags(CmsContent cmsContent, java.util.List<String> tagIds);
 }

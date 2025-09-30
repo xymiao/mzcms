@@ -8,7 +8,9 @@ import com.xymiao.common.exception.BusinessException;
 import com.xymiao.common.utils.IdsUtils;
 
 import org.jsoup.Jsoup;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,9 +18,12 @@ import java.util.List;
 @Service("cmsContentServiceImpl")
 public class CmsContentServiceImpl implements CmsContentService {
 	private final CmsContentMapper cmsContentMapper;
+	private final CmsTagService cmsTagService;
 
-	public CmsContentServiceImpl(CmsContentMapper cmsContentMapper) {
+	@Autowired
+	public CmsContentServiceImpl(CmsContentMapper cmsContentMapper, CmsTagService cmsTagService) {
 		this.cmsContentMapper = cmsContentMapper;
+		this.cmsTagService = cmsTagService;
 	}
 
 	@Override
@@ -76,5 +81,44 @@ public class CmsContentServiceImpl implements CmsContentService {
     @Override
     public void addViewCount(String id) {
         cmsContentMapper.updateViewCount(id);
+    }
+    
+    @Override
+    public void updateCommentCount(String contentId, Long commentNum) {
+        cmsContentMapper.updateCommentCount(contentId, commentNum);
+    }
+    
+    @Override
+    @Transactional
+    public CmsContent saveContentWithTags(CmsContent cmsContent, List<String> tagIds) {
+        // 保存内容
+        CmsContent savedContent = saveContent(cmsContent);
+        
+        // 如果有标签，保存标签关联
+        if (tagIds != null && !tagIds.isEmpty()) {
+            cmsTagService.addTagsToContent(savedContent.getContentId(), tagIds, savedContent.getPublishUser());
+        }
+        
+        return savedContent;
+    }
+    
+    @Override
+    @Transactional
+    public int updateContentWithTags(CmsContent cmsContent, List<String> tagIds) {
+        // 更新内容
+        int result = updateCotent(cmsContent);
+        
+        // 更新标签关联
+        if (tagIds != null) {
+            if (tagIds.isEmpty()) {
+                // 如果标签列表为空，移除所有标签
+                cmsTagService.removeTagsFromContent(cmsContent.getContentId());
+            } else {
+                // 重新设置标签
+                cmsTagService.addTagsToContent(cmsContent.getContentId(), tagIds, cmsContent.getPublishUser());
+            }
+        }
+        
+        return result;
     }
 }
